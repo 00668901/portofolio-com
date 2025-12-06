@@ -82,13 +82,3 @@ const liveChatFlow = ai.defineFlow(
     return output!;
   }
 );
-
-import Handlebars from 'handlebars';
-
-Handlebars.registerHelper('json', function(context) {
-    return JSON.stringify(context, null, 2);
-});
-
-Handlebars.registerHelper('eq', function(a, b) {
-    return a === b;
-});
