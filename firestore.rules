@@ -1,0 +1,161 @@
+/**
+ * Core Philosophy: This ruleset enforces a strict user-ownership model centered around an "author" who owns a portfolio.
+ * The author has full control over their profile and associated content like projects and AI chat logs.
+ * Public, unauthenticated users have read-only access to public portfolio content (profile, projects) and limited write access to submit contact forms or interact with the portfolio's AI chatbot.
+ *
+ * Data Structure: All author-specific data is nested under the `/authorProfiles/{authorProfileId}` path, where the `authorProfileId` corresponds to the user's UID. This hierarchical structure provides a clear and enforceable ownership model. Public-submission data, like contact messages, is stored in a separate top-level collection to segregate security concerns.
+ *
+ * Key Security Decisions:
+ * - User Enumeration is Disallowed: Listing the top-level `/authorProfiles` collection is explicitly forbidden to protect author privacy.
+ * - Contact Message Privacy: The `/contactMessages` collection is write-only for clients. This allows anyone to submit a message but prevents anyone (including the sender) from reading, updating, or deleting messages, protecting the privacy of all submissions.
+ * - AI Chat Logs: The AI chat is publicly accessible for creation, but the chat history is private and only readable/manageable by the portfolio author.
+ *
+ * Denormalization for Authorization: The rules rely on path-based security. For example, a rule for `/authorProfiles/{authorProfileId}/projects/{projectId}` checks ownership by comparing `request.auth.uid` directly to the `authorProfileId` in the path. This is fast and avoids costly `get()` calls to parent documents. On creation, we enforce that internal document fields (e.g., `authorId`) match the ID in the path to ensure data integrity.
+ *
+ * Structural Segregation: Public portfolio data (author profile, projects) is publicly readable. Private data (AI chat logs) is owner-readable. Write-only public data (contact messages) is in a completely separate collection. This segregation simplifies rules and improves query performance.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ----------------------------------------------------------------------
+    // Helper Functions
+    // ----------------------------------------------------------------------
+
+    /**
+     * Checks if a user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the currently authenticated user's UID matches the provided userId.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Checks if a document exists and if the authenticated user is the owner.
+     * Used for safe update and delete operations.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && resource != null;
+    }
+
+    /**
+     * Validates that the author profile's internal ID matches the document path ID on creation.
+     */
+    function isValidAuthorProfileOnCreate(authorProfileId) {
+      return request.resource.data.id == authorProfileId;
+    }
+
+    /**
+     * Enforces immutability of the author profile's ID field during updates.
+     */
+    function isAuthorProfileImmutableOnUpdate() {
+      return request.resource.data.id == resource.data.id;
+    }
+
+    /**
+     * Validates that the project's internal authorId matches the author's ID from the path.
+     */
+    function isValidProjectOnCreate(authorProfileId) {
+      return request.resource.data.authorId == authorProfileId;
+    }
+
+    /**
+     * Enforces immutability of the project's authorId field during updates.
+     */
+    function isProjectImmutableOnUpdate() {
+      return request.resource.data.authorId == resource.data.authorId;
+    }
+
+    /**
+     * Validates that the AI chat message's internal authorProfileId matches the author's ID from the path.
+     */
+    function isValidAiChatMessageOnCreate(authorProfileId) {
+      return request.resource.data.authorProfileId == authorProfileId;
+    }
+
+    /**
+     * Enforces immutability of the AI chat message's authorProfileId field during updates.
+     */
+    function isAiChatMessageImmutableOnUpdate() {
+      return request.resource.data.authorProfileId == resource.data.authorProfileId;
+    }
+
+    // ----------------------------------------------------------------------
+    // Collection Rules
+    // ----------------------------------------------------------------------
+
+    /**
+     * @description Manages author profiles. The profile is publicly readable, but only the author can create, update, or delete it. Listing all authors is disallowed.
+     * @path /authorProfiles/{authorProfileId}
+     * @allow (get) Any user, authenticated or not, can read a specific author's profile.
+     * @allow (create) An authenticated user can create their own profile document, e.g., `(auth.uid: 'user123') /authorProfiles/user123 (create)`.
+     * @deny (list) No user can list all documents in the `/authorProfiles` collection to prevent user enumeration.
+     * @deny (update) A user cannot update another user's profile, e.g., `(auth.uid: 'user456') /authorProfiles/user123 (update)`.
+     * @principle Enforces a "Public Read, Owner-Only Write" model and prevents user enumeration for privacy.
+     */
+    match /authorProfiles/{authorProfileId} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if isOwner(authorProfileId) && isValidAuthorProfileOnCreate(authorProfileId);
+      allow update: if isExistingOwner(authorProfileId) && isAuthorProfileImmutableOnUpdate();
+      allow delete: if isExistingOwner(authorProfileId);
+
+      /**
+       * @description Manages an author's projects. Projects are publicly readable, but only the author can manage them.
+       * @path /authorProfiles/{authorProfileId}/projects/{projectId}
+       * @allow (list) Any user can list all projects for a given author.
+       * @allow (create) The author can create a new project in their own subcollection, e.g., `(auth.uid: 'user123') /authorProfiles/user123/projects/proj-abc (create)`.
+       * @deny (create) A user cannot create a project under another author's profile, e.g., `(auth.uid: 'user456') /authorProfiles/user123/projects/proj-xyz (create)`.
+       * @deny (delete) A user cannot delete another author's project.
+       * @principle Path-based ownership ensures that all data within a user's tree is controlled by that user.
+       */
+      match /projects/{projectId} {
+        allow get: if true;
+        allow list: if true;
+        allow create: if isOwner(authorProfileId) && isValidProjectOnCreate(authorProfileId);
+        allow update: if isExistingOwner(authorProfileId) && isProjectImmutableOnUpdate();
+        allow delete: if isExistingOwner(authorProfileId);
+      }
+
+      /**
+       * @description Manages AI chat messages. Any visitor can create a message, but only the author can read the history or manage the messages.
+       * @path /authorProfiles/{authorProfileId}/aiChatMessages/{aiChatMessageId}
+       * @allow (create) Any user, authenticated or not, can create a new chat message to interact with the portfolio AI.
+       * @allow (list) The author can list their own AI chat message history, e.g., `(auth.uid: 'user123') /authorProfiles/user123/aiChatMessages (list)`.
+       * @deny (list) A visitor or another user cannot read the chat history.
+       * @deny (update) A visitor cannot modify a chat message after it has been created.
+       * @principle Segregates permissions: public create access for functionality, but owner-only read/manage access for privacy and control.
+       */
+      match /aiChatMessages/{aiChatMessageId} {
+        allow get: if isOwner(authorProfileId);
+        allow list: if isOwner(authorProfileId);
+        allow create: if isValidAiChatMessageOnCreate(authorProfileId);
+        allow update: if isExistingOwner(authorProfileId) && isAiChatMessageImmutableOnUpdate();
+        allow delete: if isExistingOwner(authorProfileId);
+      }
+    }
+
+    /**
+     * @description Stores contact messages from visitors. This is a "write-only" collection for clients.
+     * @path /contactMessages/{contactMessageId}
+     * @allow (create) Any user, authenticated or not, can submit a contact message.
+     * @deny (get) No user can read any contact message to protect the privacy of all senders.
+     * @deny (list) No user can list all contact messages.
+     * @deny (update) No user can update a message after it is sent.
+     * @principle Implements a secure "mailbox" pattern. Data can be dropped in but cannot be read or modified by clients, protecting user privacy.
+     */
+    match /contactMessages/{contactMessageId} {
+      allow get: if false;
+      allow list: if false;
+      allow create: if true;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "entities": {
+    "AuthorProfile": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AuthorProfile",
+      "type": "object",
+      "description": "Stores information about the author of the portfolio.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AuthorProfile entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The author's full name."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the author, their skills, and experience."
+        },
+        "email": {
+          "type": "string",
+          "description": "The author's email address.",
+          "format": "email"
+        },
+        "githubUrl": {
+          "type": "string",
+          "description": "URL to the author's GitHub profile.",
+          "format": "uri"
+        },
+        "instagramUrl": {
+          "type": "string",
+          "description": "URL to the author's Instagram profile.",
+          "format": "uri"
+        },
+        "facebookUrl": {
+          "type": "string",
+          "description": "URL to the author's Facebook profile.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "email"
+      ]
+    },
+    "Project": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Project",
+      "type": "object",
+      "description": "Stores information about a project in the portfolio.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Project entity."
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Reference to AuthorProfile. (Relationship: AuthorProfile 1:N Project)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the project."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the project."
+        },
+        "sourceCodeUrl": {
+          "type": "string",
+          "description": "URL to the project's source code repository.",
+          "format": "uri"
+        },
+        "previewUrl": {
+          "type": "string",
+          "description": "URL to an interactive preview of the project (if available).",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "authorId",
+        "title",
+        "description",
+        "sourceCodeUrl"
+      ]
+    },
+    "ContactMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactMessage",
+      "type": "object",
+      "description": "Stores contact messages sent by visitors through the contact form.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ContactMessage entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the person sending the message."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the person sending the message.",
+          "format": "email"
+        },
+        "message": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "sentAt": {
+          "type": "string",
+          "description": "The date and time the message was sent.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "message",
+        "sentAt"
+      ]
+    },
+    "AiChatMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AiChatMessage",
+      "type": "object",
+      "description": "Stores AI chat messages and responses.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AiChatMessage entity."
+        },
+        "authorProfileId": {
+          "type": "string",
+          "description": "Reference to AuthorProfile. (Relationship: AuthorProfile 1:N AiChatMessage)"
+        },
+        "userMessage": {
+          "type": "string",
+          "description": "The message sent by the user."
+        },
+        "aiResponse": {
+          "type": "string",
+          "description": "The AI's response to the user message."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of the message exchange.",
+          "format": "date-time"
+        },
+        "recommendedMessage": {
+          "type": "boolean",
+          "description": "Indicates whether the user message was a recommended one."
+        }
+      },
+      "required": [
+        "id",
+        "authorProfileId",
+        "userMessage",
+        "aiResponse",
+        "timestamp"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/authorProfiles/{authorProfileId}",
+        "definition": {
+          "entityName": "AuthorProfile",
+          "schema": {
+            "$ref": "#/backend/entities/AuthorProfile"
+          },
+          "description": "Stores information about the author of the portfolio. Includes contact information (GitHub, Instagram, Facebook).",
+          "params": [
+            {
+              "name": "authorProfileId",
+              "description": "The unique identifier of the author."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/authorProfiles/{authorProfileId}/projects/{projectId}",
+        "definition": {
+          "entityName": "Project",
+          "schema": {
+            "$ref": "#/backend/entities/Project"
+          },
+          "description": "Stores projects associated with a specific author. Path-based ownership is enforced.",
+          "params": [
+            {
+              "name": "authorProfileId",
+              "description": "The unique identifier of the author."
+            },
+            {
+              "name": "projectId",
+              "description": "The unique identifier of the project."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/contactMessages/{contactMessageId}",
+        "definition": {
+          "entityName": "ContactMessage",
+          "schema": {
+            "$ref": "#/backend/entities/ContactMessage"
+          },
+          "description": "Stores contact messages sent by visitors.",
+          "params": [
+            {
+              "name": "contactMessageId",
+              "description": "The unique identifier of the contact message."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/authorProfiles/{authorProfileId}/aiChatMessages/{aiChatMessageId}",
+        "definition": {
+          "entityName": "AiChatMessage",
+          "schema": {
+            "$ref": "#/backend/entities/AiChatMessage"
+          },
+          "description": "Stores AI chat messages associated with a specific author. Path-based ownership is enforced.",
+          "params": [
+            {
+              "name": "authorProfileId",
+              "description": "The unique identifier of the author."
+            },
+            {
+              "name": "aiChatMessageId",
+              "description": "The unique identifier of the AI chat message."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore data structure is designed to manage author profiles, projects, contact messages, and AI chat messages, prioritizing security, scalability, and debuggability according to the specified principles.  It focuses on path-based ownership for user-owned data and leverages structural segregation to simplify security rules.\n\n*   **/authorProfiles/{authorProfileId}**:  This collection stores individual author profiles. Using a direct path simplifies ownership and avoids complex security rules. Includes contact information such as Github, Instagram, and Facebook URLs.\n*   **/authorProfiles/{authorProfileId}/projects/{projectId}**:  This subcollection stores projects associated with a specific author. The path-based structure `/authorProfiles/{authorProfileId}/projects/{projectId}` establishes a clear ownership relationship, simplifying security rules based on `request.auth.uid == authorProfileId`.\n*   **/contactMessages/{contactMessageId}**: This collection stores contact messages. No specific authorization requirements are specified, so all documents share the same security posture.\n*   **/authorProfiles/{authorProfileId}/aiChatMessages/{aiChatMessageId}**: This subcollection stores AI chat messages associated with a specific author.  Like projects, the path `/authorProfiles/{authorProfileId}/aiChatMessages/{aiChatMessageId}` establishes ownership, allowing for simple security rules.\n\n**Authorization Independence and QAPs:**\n\nThe structure achieves Authorization Independence by avoiding hierarchical authorization dependencies.  Each subcollection's access control is derived from the path (ownership by `authorProfileId`) rather than relying on `get()` calls to parent documents. This allows atomic operations (transactions/batches) to function correctly. All documents in each collection/subcollection share the same security posture allowing for clear simple rules that do not act as filters."
+  }
+}
