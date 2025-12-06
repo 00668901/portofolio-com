@@ -11,23 +11,14 @@ import { translateWebsite } from "@/ai/flows/translate-website";
 import { collection, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
-import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema } from "@/lib/types";
+import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema, WebsiteContent } from "@/lib/types";
 import { author, projects } from "@/lib/data";
-import { translateBio } from "@/ai/flows/translate-bio";
-import type { TranslateBioInput } from "@/ai/flows/translate-bio";
 
 
 export async function handleGenerateDescription(
   input: GenerateAlternativeProjectDescriptionsInput
 ) {
   return await generateAlternativeProjectDescriptions(input);
-}
-
-export async function handleTranslateBio(input: TranslateBioInput) {
-    if (!input.targetLanguage || input.targetLanguage.toLowerCase().startsWith('en')) {
-        return { translatedBio: input.existingBio };
-    }
-    return await translateBio(input);
 }
 
 export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author' | 'projects'>) {
@@ -50,33 +41,22 @@ export async function handleGenerateTheme(): Promise<GenerateThemeOutput> {
   return await generateTheme();
 }
 
-export async function handleTranslateWebsite(input: TranslateWebsiteInput) {
+export async function handleTranslateWebsite(input: TranslateWebsiteInput): Promise<WebsiteContent> {
     if (input.targetLanguage.toLowerCase().startsWith('en')) {
         return input.content;
     }
-    return await translateWebsite(input);
+    const translated = await translateWebsite(input);
+    return { ...input.content, ...translated };
 }
 
 export async function handleContactSubmit(formData: ContactFormSchema) {  
   try {
     const { firestore } = initializeFirebase();
-    // We'll save the contact message to the AI chat log for the owner to see.
-    // This avoids needing a paid Firebase Extension for sending emails.
-    // We need an author ID for the path, we can use a hardcoded one or a dynamic one.
-    // For this portfolio, let's assume a single author. We can use a simplified author ID.
-    const authorId = 'main_author'; // A fixed ID for the portfolio owner.
-    const chatMessagesRef = collection(firestore, 'authorProfiles', authorId, 'aiChatMessages');
-    
-    const userMessage = `New Contact Form Submission:\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
-    const aiResponse = "Thank you for the message. This has been noted for the portfolio owner.";
+    const contactMessagesRef = collection(firestore, 'contactMessages');
 
-    // Using non-blocking update for better UX
-    addDocumentNonBlocking(chatMessagesRef, {
-      authorProfileId: authorId,
-      userMessage: userMessage,
-      aiResponse: aiResponse,
-      timestamp: serverTimestamp(),
-      recommendedMessage: false, // This was not a recommended prompt
+    addDocumentNonBlocking(contactMessagesRef, {
+      ...formData,
+      sentAt: serverTimestamp(),
     });
 
     return {
