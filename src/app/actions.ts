@@ -22,15 +22,9 @@ import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 import type { GenerateThemeOutput } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
-// Register Handlebars helpers globally for all prompts
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
-
-Handlebars.registerHelper('eq', function(a, b) {
-    return a === b;
-});
-
 
 export async function handleGenerateBio(
   input: GenerateAuthorBioOptionsInput
