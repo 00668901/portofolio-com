@@ -21,13 +21,13 @@ export const author: Author = {
     skills: ["React", "Next.js", "TypeScript", "Node.js", "Python", "GenAI", "UI/UX Design", "Figma"],
     contact: {
         email: "kurniawansteven429@gmail.com",
-        phone: "+1 (555) 123-4567",
+        phone: "+62 895320061963",
         social: {
-            github: "https://github.com/johndoe",
-            linkedin: "https://www.linkedin.com/in/johndoe",
-            twitter: "https://twitter.com/johndoe",
-            instagram: "https://www.instagram.com/johndoe",
-            facebook: "https://www.facebook.com/johndoe",
+            github: "https://github.com/00668901",
+            linkedin: "https://www.linkedin.com/in/steven-kurniawan-3a18442a0/",
+            twitter: "https://x.com/Steken675",
+            instagram: "https://www.instagram.com/stevenn_kurniawan29/",
+            facebook: "https://web.facebook.com/steven.kurniawan.90260",
         },
     }
 };
