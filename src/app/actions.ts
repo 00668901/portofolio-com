@@ -61,7 +61,17 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput): Prom
 }
 
 export async function handleContactSubmit(formData: ContactFormSchema) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    console.error("Resend API key is missing. Please set RESEND_API_KEY in your .env.local file.");
+    return {
+      success: false,
+      message: "Server configuration error: Email service is not set up.",
+    };
+  }
+  
+  const resend = new Resend(apiKey);
 
   try {
     await resend.emails.send({
