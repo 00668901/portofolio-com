@@ -23,6 +23,8 @@ export interface Author {
       github: string;
       linkedin: string;
       twitter: string;
+      instagram: string;
+      facebook: string;
     };
   };
 }

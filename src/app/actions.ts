@@ -14,6 +14,8 @@ import {
     AdjustPortfolioLayoutInput,
 } from "@/ai/flows/dynamically-adjust-portfolio-layout";
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { initializeFirebase } from "@/firebase";
 
 
 export async function handleGenerateBio(
@@ -45,7 +47,6 @@ const contactFormSchema = z.object({
 export async function handleContactSubmit(formData: {
   name: string;
   email: string;
-
   message: string;
 }) {
   const parsed = contactFormSchema.safeParse(formData);
@@ -56,13 +57,24 @@ export async function handleContactSubmit(formData: {
       message: "Invalid form data.",
     };
   }
+  
+  try {
+    const { firestore } = initializeFirebase();
+    const contactMessagesRef = collection(firestore, 'contactMessages');
+    await addDoc(contactMessagesRef, {
+      ...parsed.data,
+      sentAt: serverTimestamp(),
+    });
 
-  // Here you would typically save the message to a database.
-  // For this example, we'll just log it and return success.
-  console.log("New contact message:", parsed.data);
-
-  return {
-    success: true,
-    message: "Thank you for your message! I'll get back to you soon.",
-  };
+    return {
+      success: true,
+      message: "Thank you for your message! I'll get back to you soon.",
+    };
+  } catch (error) {
+    console.error("Error saving contact message:", error);
+    return {
+      success: false,
+      message: "There was an error sending your message. Please try again later.",
+    };
+  }
 }

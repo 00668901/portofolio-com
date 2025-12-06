@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import { author } from "@/lib/data";
 import { Button } from "./ui/button";
 
@@ -23,6 +23,16 @@ export default function Footer() {
             <Button variant="ghost" size="icon" asChild>
                 <a href={author.contact.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                     <Twitter className="h-5 w-5" />
+                </a>
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+                <a href={author.contact.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <Instagram className="h-5 w-5" />
+                </a>
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+                <a href={author.contact.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <Facebook className="h-5 w-5" />
                 </a>
             </Button>
           </div>

@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Loader2, Send, Mail, Phone, MapPin } from "lucide-react";
+import { Loader2, Send, Mail, Phone, Github, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -71,17 +71,49 @@ export default function ContactSection() {
             <p className="text-muted-foreground max-w-2xl mx-auto">Have a project in mind or just want to say hello? Drop me a line or find me online.</p>
         </div>
         <div className="grid md:grid-cols-5 gap-12">
-            <div className="md:col-span-2 space-y-6">
-                <h3 className="font-headline text-2xl font-bold">Contact Information</h3>
-                <div className="space-y-4 text-lg">
-                    <a href={`mailto:${author.contact.email}`} className="flex items-center gap-4 group">
-                        <Mail className="h-6 w-6 text-primary flex-shrink-0" />
-                        <span className="text-muted-foreground group-hover:text-primary transition-colors">{author.contact.email}</span>
-                    </a>
-                    <a href={`tel:${author.contact.phone.replace(/\s/g, "")}`} className="flex items-center gap-4 group">
-                        <Phone className="h-6 w-6 text-primary flex-shrink-0" />
-                        <span className="text-muted-foreground group-hover:text-primary transition-colors">{author.contact.phone}</span>
-                    </a>
+            <div className="md:col-span-2 space-y-8">
+                <div>
+                    <h3 className="font-headline text-2xl font-bold mb-4">Contact Information</h3>
+                    <div className="space-y-4 text-lg">
+                        <a href={`mailto:${author.contact.email}`} className="flex items-center gap-4 group">
+                            <Mail className="h-6 w-6 text-primary flex-shrink-0" />
+                            <span className="text-muted-foreground group-hover:text-primary transition-colors">{author.contact.email}</span>
+                        </a>
+                        <a href={`tel:${author.contact.phone.replace(/\s/g, "")}`} className="flex items-center gap-4 group">
+                            <Phone className="h-6 w-6 text-primary flex-shrink-0" />
+                            <span className="text-muted-foreground group-hover:text-primary transition-colors">{author.contact.phone}</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 className="font-headline text-2xl font-bold mb-4">Follow Me</h3>
+                     <div className="flex items-center gap-2">
+                        <Button variant="outline" size="icon" asChild>
+                            <a href={author.contact.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <Github className="h-5 w-5" />
+                            </a>
+                        </Button>
+                        <Button variant="outline" size="icon" asChild>
+                            <a href={author.contact.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <Linkedin className="h-5 w-5" />
+                            </a>
+                        </Button>
+                        <Button variant="outline" size="icon" asChild>
+                            <a href={author.contact.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                <Twitter className="h-5 w-5" />
+                            </a>
+                        </Button>
+                        <Button variant="outline" size="icon" asChild>
+                            <a href={author.contact.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <Instagram className="h-5 w-5" />
+                            </a>
+                        </Button>
+                        <Button variant="outline" size="icon" asChild>
+                            <a href={author.contact.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <Facebook className="h-5 w-5" />
+                            </a>
+                        </Button>
+                    </div>
                 </div>
             </div>
             <div className="md:col-span-3">
