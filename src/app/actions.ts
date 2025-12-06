@@ -19,6 +19,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 import type { GenerateThemeOutput } from "@/lib/types";
+import { author, projects } from "@/lib/data";
 
 export async function handleGenerateBio(
   input: GenerateAuthorBioOptionsInput
@@ -36,8 +37,13 @@ export async function handleLayoutAdjustment(input: AdjustPortfolioLayoutInput) 
     return await adjustPortfolioLayout(input);
 }
 
-export async function handleLiveChat(input: LiveChatInput) {
-  return await liveChat(input);
+export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author' | 'projects'>) {
+  return await liveChat({
+    ...input,
+    name: author.name,
+    author: author,
+    projects: projects,
+  });
 }
 
 export async function handleGenerateTheme(): Promise<GenerateThemeOutput> {

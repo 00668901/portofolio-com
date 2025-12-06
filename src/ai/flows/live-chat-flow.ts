@@ -1,7 +1,7 @@
 'use server';
 
 /**
- * @fileOverview A simple live chat flow.
+ * @fileOverview A conversational AI flow with chat history and portfolio context.
  *
  * - liveChat - A function that handles the live chat conversation.
  * - LiveChatInput - The input type for the liveChat function.
@@ -10,15 +10,24 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { author, projects } from '@/lib/data';
+
+const MessageSchema = z.object({
+    role: z.enum(['user', 'model']),
+    content: z.string(),
+});
 
 const LiveChatInputSchema = z.object({
-  message: z.string().describe('The user\'s message in the chat.'),
+  history: z.array(MessageSchema).describe('The history of the conversation.'),
+  message: z.string().describe("The user's latest message in the chat."),
   name: z.string().describe('The name of the portfolio owner.'),
+  author: z.any().describe("The author's profile data."),
+  projects: z.any().describe("The list of projects in the portfolio."),
 });
 export type LiveChatInput = z.infer<typeof LiveChatInputSchema>;
 
 const LiveChatOutputSchema = z.object({
-  response: z.string().describe('The AI\'s response to the user.'),
+  response: z.string().describe("The AI's response to the user."),
 });
 export type LiveChatOutput = z.infer<typeof LiveChatOutputSchema>;
 
@@ -30,11 +39,36 @@ const prompt = ai.definePrompt({
   name: 'liveChatPrompt',
   input: {schema: LiveChatInputSchema},
   output: {schema: LiveChatOutputSchema},
-  prompt: `You are a friendly and helpful AI assistant for {{name}}, the owner of this portfolio. Your goal is to answer questions about {{name}}'s work, skills, or how to get in touch. Keep your answers concise and professional. If you don't know the answer, say that you will pass the message along to {{name}}.
+  prompt: `You are a helpful and versatile AI assistant for {{name}}, the owner of this portfolio. Your personality is friendly, professional, and engaging.
 
-User message: {{{message}}}
+You have two main goals:
+1.  Answer questions about {{name}} and their portfolio. Use the provided context about the author and their projects as your primary source of truth. If the user asks about projects, list them from the provided data.
+2.  Be a general conversational AI. If the user asks something unrelated to the portfolio, answer it to the best of your ability, like a standard large language model (e.g., Google Gemini).
 
-Your response:`,
+Always maintain your persona as {{name}}'s assistant. Do not break character. Keep your answers concise but informative.
+
+## Portfolio Context:
+
+### Author Information ({{name}}):
+\`\`\`json
+{{{json author}}}
+\`\`\`
+
+### Projects:
+\`\`\`json
+{{{json projects}}}
+\`\`\`
+
+## Conversation History:
+{{#each history}}
+- {{#if (eq role 'user')}}User{{else}}Assistant{{/if}}: {{{content}}}
+{{/each}}
+
+## New User Message:
+- User: {{{message}}}
+
+## Your Response:
+- Assistant:`,
 });
 
 const liveChatFlow = ai.defineFlow(
@@ -48,3 +82,13 @@ const liveChatFlow = ai.defineFlow(
     return output!;
   }
 );
+
+import Handlebars from 'handlebars';
+
+Handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context, null, 2);
+});
+
+Handlebars.registerHelper('eq', function(a, b) {
+    return a === b;
+});
