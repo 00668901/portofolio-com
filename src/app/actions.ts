@@ -13,15 +13,21 @@ import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema } from "@/lib/types";
 import { author, projects } from "@/lib/data";
+import { translateBio } from "@/ai/flows/translate-bio";
+import type { TranslateBioInput } from "@/ai/flows/translate-bio";
 
-Handlebars.registerHelper('json', function(context) {
-    return JSON.stringify(context, null, 2);
-});
 
 export async function handleGenerateDescription(
   input: GenerateAlternativeProjectDescriptionsInput
 ) {
   return await generateAlternativeProjectDescriptions(input);
+}
+
+export async function handleTranslateBio(input: TranslateBioInput) {
+    if (!input.targetLanguage || input.targetLanguage.toLowerCase().startsWith('en')) {
+        return { translatedBio: input.existingBio };
+    }
+    return await translateBio(input);
 }
 
 export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author' | 'projects'>) {
@@ -58,6 +64,19 @@ export async function handleContactSubmit(formData: ContactFormSchema) {
     
     // Using non-blocking update for better UX
     addDocumentNonBlocking(contactMessagesRef, {
+      // Data for Trigger Email Extension
+      to: "kurniawansteven429@gmail.com",
+      message: {
+        subject: `New message from ${formData.name} via your portfolio`,
+        html: `
+          <p>You have received a new message from your portfolio contact form.</p>
+          <p><strong>Name:</strong> ${formData.name}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${formData.message}</p>
+        `,
+      },
+      // Original data for your records
       ...formData,
       sentAt: serverTimestamp(),
     });
