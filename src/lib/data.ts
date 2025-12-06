@@ -61,6 +61,7 @@ export const projects: Project[] = [
         imageUrl:getImage("project-3").imageUrl,
         imageHint: getImage("project-3").imageHint,
         sourceUrl: "https://github.com",
+        liveUrl: "https://example.com"
     },
     {
         id: "p4",
@@ -80,6 +81,7 @@ export const projects: Project[] = [
         imageUrl: getImage("project-5").imageUrl,
         imageHint: getImage("project-5").imageHint,
         sourceUrl: "https://github.com",
+        liveUrl: "https://example.com"
     },
     {
         id: "p6",
