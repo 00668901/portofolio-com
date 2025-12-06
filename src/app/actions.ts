@@ -1,6 +1,5 @@
 "use server";
 
-import Handlebars from "handlebars";
 import {
   generateAlternativeProjectDescriptions,
   GenerateAlternativeProjectDescriptionsInput,
@@ -8,10 +7,10 @@ import {
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { translateWebsite } from "@/ai/flows/translate-website";
-import { collection, serverTimestamp, addDoc } from "firebase/firestore";
-import { initializeServerFirebase } from "@/firebase/server-init";
 import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema, WebsiteContent } from "@/lib/types";
 import { author, projects } from "@/lib/data";
+import { Resend } from 'resend';
+import ContactFormEmail from '@/emails/contact-form-email';
 
 
 export async function handleGenerateDescription(
@@ -63,13 +62,18 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput): Prom
 }
 
 export async function handleContactSubmit(formData: ContactFormSchema) {
-  try {
-    const { firestore } = await initializeServerFirebase();
-    const contactMessagesRef = collection(firestore, 'contactMessages');
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-    await addDoc(contactMessagesRef, {
-      ...formData,
-      sentAt: serverTimestamp(),
+  try {
+    await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: 'kurniawansteven429@gmail.com',
+      subject: `New message from ${formData.name}`,
+      react: ContactFormEmail({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
     });
 
     return {
@@ -77,7 +81,7 @@ export async function handleContactSubmit(formData: ContactFormSchema) {
       message: "Thank you for your message! I'll get back to you soon.",
     };
   } catch (error) {
-    console.error("Error saving contact message:", error);
+    console.error("Error sending email:", error);
     return {
       success: false,
       message: "There was an error sending your message. Please try again later.",
