@@ -8,9 +8,8 @@ import {
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { translateWebsite } from "@/ai/flows/translate-website";
-import { collection, serverTimestamp } from "firebase/firestore";
-import { initializeFirebase } from "@/firebase";
-import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
+import { collection, serverTimestamp, addDoc } from "firebase/firestore";
+import { initializeServerFirebase } from "@/firebase/server-init";
 import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema, WebsiteContent } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
@@ -63,12 +62,12 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput): Prom
     };
 }
 
-export async function handleContactSubmit(formData: ContactFormSchema) {  
+export async function handleContactSubmit(formData: ContactFormSchema) {
   try {
-    const { firestore } = initializeFirebase();
+    const { firestore } = await initializeServerFirebase();
     const contactMessagesRef = collection(firestore, 'contactMessages');
 
-    await addDocumentNonBlocking(contactMessagesRef, {
+    await addDoc(contactMessagesRef, {
       ...formData,
       sentAt: serverTimestamp(),
     });
