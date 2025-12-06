@@ -32,9 +32,11 @@ export default function AuthorSection({ author }: AuthorSectionProps) {
   const onGenerateBio = async () => {
     setIsGenerating(true);
     try {
+      const userLang = navigator.language;
       const result = await handleGenerateBio({
         existingBio: bio,
         numberOfOptions: 3,
+        targetLanguage: userLang,
       });
       if (result.bios && result.bios.length > 0) {
         setBioOptions(result.bios);

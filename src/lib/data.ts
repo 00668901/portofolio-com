@@ -13,7 +13,7 @@ const getImage = (id: string) => {
 }
 
 export const author: Author = {
-    name: "Alex Doe",
+    name: "Steven Kurniawan Haryanto",
     title: "Creative Full-Stack Developer & AI Enthusiast",
     bio: "A passionate developer with a knack for creating beautiful, functional, and user-centric digital experiences. With a background in both design and engineering, I specialize in bringing ideas to life from concept to deployment. I'm driven by the challenge of solving complex problems and the thrill of learning new technologies, especially in the realm of AI.",
     avatarUrl: getImage("author-avatar").imageUrl,

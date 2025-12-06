@@ -14,6 +14,7 @@ import {z} from 'genkit';
 const GenerateAuthorBioOptionsInputSchema = z.object({
   existingBio: z.string().describe('The existing author bio to generate alternatives for.'),
   numberOfOptions: z.number().default(3).describe('The number of alternative bios to generate.'),
+  targetLanguage: z.string().optional().describe('The target language for the bio, e.g., "Indonesian", "Spanish".'),
 });
 export type GenerateAuthorBioOptionsInput = z.infer<typeof GenerateAuthorBioOptionsInputSchema>;
 
@@ -31,15 +32,16 @@ const generateAuthorBioOptionsPrompt = ai.definePrompt({
   input: {schema: GenerateAuthorBioOptionsInputSchema},
   output: {schema: GenerateAuthorBioOptionsOutputSchema},
   prompt: `You are a professional biography writer. Given an existing author bio, generate {{numberOfOptions}} alternative bios that are engaging and highlight the author's skills and experience.
+{{#if targetLanguage}}
+Then, translate all the generated bios into {{targetLanguage}}.
+{{/if}}
 
 Existing Bio: {{{existingBio}}}
 
-Alternative Bios:
-{{#each (range numberOfOptions)}}
-{{@index + 1}}. {{/each}}`,
+Alternative Bios:`,
   config: {
     temperature: 0.7,
-    maxOutputTokens: 500,
+    maxOutputTokens: 1024,
   },
 });
 
@@ -50,30 +52,7 @@ const generateAuthorBioOptionsFlow = ai.defineFlow(
     outputSchema: GenerateAuthorBioOptionsOutputSchema,
   },
   async input => {
-    const {
-      output: {
-        bios: rawBios,
-      },
-    } = await generateAuthorBioOptionsPrompt(input);
-
-    const bios = rawBios?.map(bio => {
-      // Remove leading numbering from the bios
-      return bio.replace(/^\d+\.\s*/, '');
-    });
-
-    return {
-      bios: bios ?? [],
-    };
+    const {output} = await generateAuthorBioOptionsPrompt(input);
+    return output!;
   }
 );
-
-// Helper function for Handlebars to generate a range of numbers
-Handlebars.registerHelper('range', function (count: number) {
-  const result = [];
-  for (let i = 0; i < count; i++) {
-    result.push(i);
-  }
-  return result;
-});
-
-import Handlebars from 'handlebars';
