@@ -61,7 +61,7 @@ Always maintain your persona as {{name}}'s assistant. Do not break character. Ke
 
 ## Conversation History:
 {{#each history}}
-- {{#if (this.role === 'user')}}User{{else}}Assistant{{/if}}: {{{this.content}}}
+- {{#if (eq this.role 'user')}}User{{else}}Assistant{{/if}}: {{{this.content}}}
 {{/each}}
 
 ## New User Message:

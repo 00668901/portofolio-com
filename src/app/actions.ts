@@ -26,6 +26,10 @@ Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
 
+Handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
+});
+
 export async function handleGenerateBio(
   input: GenerateAuthorBioOptionsInput
 ) {
