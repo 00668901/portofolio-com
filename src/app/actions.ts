@@ -1,6 +1,5 @@
 "use server";
 
-import { z } from "zod";
 import Handlebars from "handlebars";
 import {
   translateBio,
@@ -13,10 +12,10 @@ import {
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { translateWebsite } from "@/ai/flows/translate-website";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
-import type { GenerateThemeOutput, TranslateWebsiteInput } from "@/lib/types";
+import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
 Handlebars.registerHelper('json', function(context) {
@@ -67,34 +66,14 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput) {
     return await translateWebsite(input);
 }
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  message: z.string().min(10, "Message must be at least 10 characters."),
-});
-
-export async function handleContactSubmit(formData: {
-  name: string;
-  email: string;
-  message: string;
-}) {
-  const parsed = contactFormSchema.safeParse(formData);
-
-  if (!parsed.success) {
-    return {
-      success: false,
-      message: "Invalid form data.",
-      errors: parsed.error.flatten().fieldErrors,
-    };
-  }
-  
+export async function handleContactSubmit(formData: ContactFormSchema) {  
   try {
     const { firestore } = initializeFirebase();
     const contactMessagesRef = collection(firestore, 'contactMessages');
     
     // Using non-blocking update for better UX
     addDocumentNonBlocking(contactMessagesRef, {
-      ...parsed.data,
+      ...formData,
       sentAt: serverTimestamp(),
     });
 

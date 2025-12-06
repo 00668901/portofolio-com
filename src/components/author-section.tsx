@@ -11,9 +11,12 @@ import { useToast } from "@/hooks/use-toast";
 
 interface AuthorSectionProps {
   author: Author;
+  content: {
+    title: string;
+  };
 }
 
-export default function AuthorSection({ author }: AuthorSectionProps) {
+export default function AuthorSection({ author, content }: AuthorSectionProps) {
   const [bio, setBio] = useState(author.bio);
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
@@ -75,7 +78,7 @@ export default function AuthorSection({ author }: AuthorSectionProps) {
           </div>
         </div>
         <div className="md:col-span-2">
-          <h3 className="font-headline text-2xl font-bold mb-4">About Me</h3>
+          <h3 className="font-headline text-2xl font-bold mb-4">{content.title}</h3>
           <div className="relative">
             <p className="text-muted-foreground text-lg leading-relaxed">{bio}</p>
             <Button

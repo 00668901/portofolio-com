@@ -20,6 +20,11 @@ import { useToast } from "@/hooks/use-toast";
 import { handleContactSubmit } from "@/app/actions";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import { author } from "@/lib/data";
+import type { WebsiteContent, ContactFormSchema } from "@/lib/types";
+
+interface ContactSectionProps {
+  content: WebsiteContent['page']['contact'];
+}
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,7 +38,8 @@ const formSchema = z.object({
   }),
 });
 
-export default function ContactSection() {
+
+export default function ContactSection({ content }: ContactSectionProps) {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,15 +56,15 @@ export default function ContactSection() {
     const result = await handleContactSubmit(values);
     if (result.success) {
       toast({
-        title: "Message Sent!",
-        description: result.message,
+        title: content.form.successMessage,
+        description: content.form.successDescription,
       });
       form.reset();
     } else {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: result.message,
+        title: content.form.errorMessage,
+        description: result.message || content.form.errorDescription,
       });
     }
   }
@@ -67,13 +73,13 @@ export default function ContactSection() {
     <section className="py-12 md:py-24 bg-card">
       <div className="container">
         <div className="text-center mb-12">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">Get in Touch</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Have a project in mind or just want to say hello? Drop me a line or find me online.</p>
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">{content.title}</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">{content.subtitle}</p>
         </div>
         <div className="grid md:grid-cols-5 gap-12">
             <div className="md:col-span-2 space-y-8">
                 <div>
-                    <h3 className="font-headline text-2xl font-bold mb-4">Contact Information</h3>
+                    <h3 className="font-headline text-2xl font-bold mb-4">{content.contactInfo}</h3>
                     <div className="space-y-4 text-lg">
                         <a href={`mailto:${author.contact.email}`} className="flex items-center gap-4 group">
                             <Mail className="h-6 w-6 text-primary flex-shrink-0" />
@@ -86,7 +92,7 @@ export default function ContactSection() {
                     </div>
                 </div>
                 <div>
-                    <h3 className="font-headline text-2xl font-bold mb-4">Follow Me</h3>
+                    <h3 className="font-headline text-2xl font-bold mb-4">{content.followMe}</h3>
                      <div className="flex items-center gap-2">
                         {author.contact.social.github && (
                             <Button variant="outline" size="icon" asChild>
@@ -129,8 +135,7 @@ export default function ContactSection() {
             <div className="md:col-span-3">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Send a Message</CardTitle>
-                        <CardDescription>I'll get back to you as soon as possible.</CardDescription>
+                        <CardTitle>{content.sendMessage}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Form {...form}>
@@ -141,9 +146,9 @@ export default function ContactSection() {
                                     name="name"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel>Name</FormLabel>
+                                        <FormLabel>{content.form.nameLabel}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Your Name" {...field} />
+                                            <Input placeholder={content.form.namePlaceholder} {...field} />
                                         </FormControl>
                                         <FormMessage />
                                         </FormItem>
@@ -154,9 +159,9 @@ export default function ContactSection() {
                                     name="email"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel>{content.form.emailLabel}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="your.email@example.com" {...field} />
+                                            <Input placeholder={content.form.emailPlaceholder} {...field} />
                                         </FormControl>
                                         <FormMessage />
                                         </FormItem>
@@ -168,10 +173,10 @@ export default function ContactSection() {
                                 name="message"
                                 render={({ field }) => (
                                     <FormItem>
-                                    <FormLabel>Message</FormLabel>
+                                    <FormLabel>{content.form.messageLabel}</FormLabel>
                                     <FormControl>
                                         <Textarea
-                                        placeholder="Tell me about your project or idea..."
+                                        placeholder={content.form.messagePlaceholder}
                                         className="min-h-[120px]"
                                         {...field}
                                         />
@@ -185,11 +190,11 @@ export default function ContactSection() {
                                     {isSubmitting ? (
                                         <>
                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Sending...
+                                            {content.form.sendingButton}
                                         </>
                                     ) : (
                                         <>
-                                            Send Message
+                                            {content.form.sendButton}
                                             <Send className="ml-2 h-4 w-4" />
                                         </>
                                     )}

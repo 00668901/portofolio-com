@@ -6,8 +6,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'zod';
-import { WebsiteContentSchema, TranslateWebsiteInputSchema, TranslateWebsiteOutputSchema, type TranslateWebsiteOutput, type TranslateWebsiteInput } from '@/lib/types';
+import { TranslateWebsiteInputSchema, TranslateWebsiteOutputSchema, type TranslateWebsiteOutput, type TranslateWebsiteInput } from '@/lib/types';
 
 
 export async function translateWebsite(
@@ -23,9 +22,9 @@ const translateWebsitePrompt = ai.definePrompt({
   prompt: `You are an expert translator. Translate the following JSON object containing website content into {{targetLanguage}}.
 
   IMPORTANT:
-  - Translate all user-facing text fields: 'name', 'title', 'bio', 'description', 'heroTitle', 'heroSubtitle', 'viewWorkButton'.
-  - Do NOT translate any other fields, especially IDs, URLs, or hints. Return them as they are.
-  - Your response MUST be a valid JSON object that strictly adheres to the provided output schema.
+  - Translate the value of all string fields EXCEPT for 'id', 'avatarUrl', 'imageUrl', 'imageHint', 'sourceUrl', and 'liveUrl'.
+  - The entire 'author.contact' object, including all sub-fields like email, phone, and social URLs, should NOT be translated. Return it as is.
+  - Your response MUST be a valid JSON object that strictly adheres to the provided output schema. Do not add any commentary.
 
   JSON to translate:
   \`\`\`json
@@ -33,7 +32,7 @@ const translateWebsitePrompt = ai.definePrompt({
   \`\`\`
   `,
   config: {
-    temperature: 0.2,
+    temperature: 0.1,
   },
 });
 

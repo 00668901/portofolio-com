@@ -61,6 +61,13 @@ export const GenerateThemeOutputSchema = z.object({
 });
 export type GenerateThemeOutput = z.infer<typeof GenerateThemeOutputSchema>;
 
+const ContactFormSchema = z.object({
+    name: z.string(),
+    email: z.string(),
+    message: z.string(),
+});
+export type ContactFormSchema = z.infer<typeof ContactFormSchema>;
+
 export const WebsiteContentSchema = z.object({
     author: AuthorSchema,
     projects: z.array(ProjectSchema),
@@ -68,6 +75,37 @@ export const WebsiteContentSchema = z.object({
       heroTitle: z.string(),
       heroSubtitle: z.string(),
       viewWorkButton: z.string(),
+      about: z.object({
+        title: z.string(),
+      }),
+      myWork: z.object({
+        title: z.string(),
+        learnMoreButton: z.string(),
+      }),
+      contact: z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        contactInfo: z.string(),
+        followMe: z.string(),
+        sendMessage: z.string(),
+        form: z.object({
+            nameLabel: z.string(),
+            namePlaceholder: z.string(),
+            emailLabel: z.string(),
+            emailPlaceholder: z.string(),
+            messageLabel: z.string(),
+            messagePlaceholder: z.string(),
+            sendButton: z.string(),
+            sendingButton: z.string(),
+            successMessage: z.string(),
+            successDescription: z.string(),
+            errorMessage: z.string(),
+            errorDescription: z.string(),
+        }),
+      }),
+      footer: z.object({
+        copyright: z.string(),
+      })
     }),
 });
 export type WebsiteContent = z.infer<typeof WebsiteContentSchema>;

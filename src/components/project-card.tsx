@@ -33,9 +33,10 @@ import {
 
 interface ProjectCardProps {
   project: Project;
+  learnMoreButtonText: string;
 }
 
-export default function ProjectCard({ project: initialProject }: ProjectCardProps) {
+export default function ProjectCard({ project: initialProject, learnMoreButtonText }: ProjectCardProps) {
   const [project, setProject] = useState(initialProject);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -157,7 +158,7 @@ export default function ProjectCard({ project: initialProject }: ProjectCardProp
               </Tooltip>
             )}
           </div>
-          <Button onClick={() => setIsPreviewOpen(true)}>Learn More</Button>
+          <Button onClick={() => setIsPreviewOpen(true)}>{learnMoreButtonText}</Button>
         </CardFooter>
       </Card>
       

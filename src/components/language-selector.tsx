@@ -20,10 +20,10 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { handleTranslateWebsite } from "@/app/actions";
-import type { PageContent } from "@/app/page";
+import type { WebsiteContent } from "@/lib/types";
 
 const languages = [
-    { value: "en", label: "English" },
+    { value: "en", label: "English (Original)" },
     { value: "id", label: "Indonesian" },
     { value: "fr", label: "French" },
     { value: "es", label: "Spanish" },
@@ -32,14 +32,17 @@ const languages = [
     { value: "ko", label: "Korean" },
     { value: "zh", label: "Chinese" },
     { value: "ru", label: "Russian" },
+    { value: "pt", label: "Portuguese" },
+    { value: "ar", label: "Arabic" },
+    { value: "hi", label: "Hindi" },
 ];
 
 interface LanguageSelectorProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  pageContent: PageContent;
-  setPageContent: (content: PageContent) => void;
-  initialContent: PageContent;
+  pageContent: WebsiteContent;
+  setPageContent: (content: WebsiteContent) => void;
+  initialContent: WebsiteContent;
 }
 
 export default function LanguageSelector({
@@ -63,7 +66,7 @@ export default function LanguageSelector({
       return;
     }
     
-    if (selectedLanguage === 'en') {
+    if (selectedLanguage.toLowerCase().startsWith('en')) {
       setPageContent(initialContent);
       toast({
         title: "Language Reset",
@@ -76,7 +79,7 @@ export default function LanguageSelector({
     setIsTranslating(true);
     toast({
       title: "Translating Website...",
-      description: `AI is translating the content into ${languages.find(l => l.value === selectedLanguage)?.label}.`,
+      description: `AI is translating the content into ${languages.find(l => l.value === selectedLanguage)?.label}. Please wait.`,
     });
 
     try {
@@ -85,7 +88,7 @@ export default function LanguageSelector({
         targetLanguage: selectedLanguage,
       });
       
-      setPageContent(translatedContent as PageContent);
+      setPageContent(translatedContent as WebsiteContent);
       
       toast({
         title: "Translation Complete!",
