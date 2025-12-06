@@ -16,4 +16,13 @@ export interface Author {
   avatarUrl: string;
   avatarHint: string;
   skills: string[];
+  contact: {
+    email: string;
+    phone: string;
+    social: {
+      github: string;
+      linkedin: string;
+      twitter: string;
+    };
+  };
 }

@@ -18,7 +18,16 @@ export const author: Author = {
     bio: "A passionate developer with a knack for creating beautiful, functional, and user-centric digital experiences. With a background in both design and engineering, I specialize in bringing ideas to life from concept to deployment. I'm driven by the challenge of solving complex problems and the thrill of learning new technologies, especially in the realm of AI.",
     avatarUrl: getImage("author-avatar").imageUrl,
     avatarHint: getImage("author-avatar").imageHint,
-    skills: ["React", "Next.js", "TypeScript", "Node.js", "Python", "GenAI", "UI/UX Design", "Figma"]
+    skills: ["React", "Next.js", "TypeScript", "Node.js", "Python", "GenAI", "UI/UX Design", "Figma"],
+    contact: {
+        email: "alex.doe@example.com",
+        phone: "+1 (555) 123-4567",
+        social: {
+            github: "https://github.com",
+            linkedin: "https://linkedin.com",
+            twitter: "https://twitter.com",
+        },
+    }
 };
 
 export const projects: Project[] = [

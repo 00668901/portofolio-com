@@ -13,6 +13,7 @@ import {
     adjustPortfolioLayout,
     AdjustPortfolioLayoutInput,
 } from "@/ai/flows/dynamically-adjust-portfolio-layout";
+import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 
 
 export async function handleGenerateBio(
@@ -29,6 +30,10 @@ export async function handleGenerateDescription(
 
 export async function handleLayoutAdjustment(input: AdjustPortfolioLayoutInput) {
     return await adjustPortfolioLayout(input);
+}
+
+export async function handleLiveChat(input: LiveChatInput) {
+  return await liveChat(input);
 }
 
 const contactFormSchema = z.object({
