@@ -46,7 +46,21 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput): Prom
         return input.content;
     }
     const translated = await translateWebsite(input);
-    return { ...input.content, ...translated };
+
+    const translatedProjects = input.content.projects.map((project, index) => {
+        const translatedProject = translated.projects[index];
+        return {
+            ...project,
+            title: translatedProject.title,
+            description: translatedProject.description,
+        };
+    });
+
+    return {
+        ...input.content,
+        ...translated,
+        projects: translatedProjects,
+    };
 }
 
 export async function handleContactSubmit(formData: ContactFormSchema) {  
@@ -54,7 +68,7 @@ export async function handleContactSubmit(formData: ContactFormSchema) {
     const { firestore } = initializeFirebase();
     const contactMessagesRef = collection(firestore, 'contactMessages');
 
-    addDocumentNonBlocking(contactMessagesRef, {
+    await addDocumentNonBlocking(contactMessagesRef, {
       ...formData,
       sentAt: serverTimestamp(),
     });
