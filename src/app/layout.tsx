@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import { Toaster } from "@/components/ui/toaster"
 import LiveChatWidget from "@/components/live-chat-widget";
 import { FirebaseClientProvider } from '@/firebase';
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
@@ -23,18 +24,20 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <ThemeProvider
+        <NextThemesProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <FirebaseClientProvider>
-            {children}
-            <Toaster />
-            <LiveChatWidget />
-          </FirebaseClientProvider>
-        </ThemeProvider>
+          <ThemeProvider>
+            <FirebaseClientProvider>
+              {children}
+              <Toaster />
+              <LiveChatWidget />
+            </FirebaseClientProvider>
+          </ThemeProvider>
+        </NextThemesProvider>
       </body>
     </html>
   );
