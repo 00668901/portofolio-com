@@ -5,3 +5,4 @@ import '@/ai/flows/generate-alternative-project-descriptions.ts';
 import '@/ai/flows/dynamically-adjust-portfolio-layout.ts';
 import '@/ai/flows/generate-author-bio-options.ts';
 import '@/ai/flows/live-chat-flow.ts';
+import '@/ai/flows/generate-ui-theme.ts';

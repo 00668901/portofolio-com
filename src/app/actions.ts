@@ -14,6 +14,7 @@ import {
     AdjustPortfolioLayoutInput,
 } from "@/ai/flows/dynamically-adjust-portfolio-layout";
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
+import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
@@ -37,6 +38,10 @@ export async function handleLayoutAdjustment(input: AdjustPortfolioLayoutInput) 
 
 export async function handleLiveChat(input: LiveChatInput) {
   return await liveChat(input);
+}
+
+export async function handleGenerateTheme() {
+  return await generateTheme();
 }
 
 const contactFormSchema = z.object({
