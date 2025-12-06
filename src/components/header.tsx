@@ -7,12 +7,12 @@ import { Button } from "./ui/button";
 import { handleGenerateTheme } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import LanguageSelector from './language-selector';
-import type { PageContent } from '@/app/page';
+import type { WebsiteContent } from "@/lib/types";
 
 interface HeaderProps {
-  pageContent: PageContent;
-  setPageContent: (content: PageContent) => void;
-  initialContent: PageContent;
+  pageContent: WebsiteContent;
+  setPageContent: (content: WebsiteContent) => void;
+  initialContent: WebsiteContent;
 }
 
 export default function Header({ pageContent, setPageContent, initialContent }: HeaderProps) {
