@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // This is needed to allow requests from the development environment (Cloud Workstations).
+    allowedDevOrigins: [
+      'https://*.cloudworkstations.dev',
+    ],
+  },
   images: {
     remotePatterns: [
       {

@@ -7,7 +7,8 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
+import { z } from 'zod';
+import type { GenerateThemeOutput } from '@/app/actions';
 
 const ThemeColorsSchema = z.object({
   background: z.string().describe('The background color in HSL format (e.g., "231 60% 94%").'),
@@ -31,12 +32,10 @@ const ThemeColorsSchema = z.object({
   ring: z.string().describe('The focus ring color in HSL format.'),
 });
 
-export const GenerateThemeOutputSchema = z.object({
+const GenerateThemeOutputSchema = z.object({
   light: ThemeColorsSchema.describe('The full color palette for the light theme.'),
   dark: ThemeColorsSchema.describe('The full color palette for the dark theme.'),
 });
-
-export type GenerateThemeOutput = z.infer<typeof GenerateThemeOutputSchema>;
 
 export async function generateTheme(): Promise<GenerateThemeOutput> {
   return generateThemeFlow();

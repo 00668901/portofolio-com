@@ -1,7 +1,7 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react"
-import type { GenerateThemeOutput } from "@/ai/flows/generate-ui-theme";
+import type { GenerateThemeOutput } from "@/app/actions";
 
 type Theme = "dark" | "light"
 
