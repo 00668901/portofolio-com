@@ -22,6 +22,7 @@ import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 import type { GenerateThemeOutput } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
+Handlebars.registerHelper('eq', (a, b) => a === b);
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
