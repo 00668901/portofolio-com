@@ -35,11 +35,7 @@ const generateAuthorBioOptionsPrompt = ai.definePrompt({
 Given an existing author bio, generate {{numberOfOptions}} alternative bios that are engaging and highlight the author's skills and experience.
 
 {{#if targetLanguage}}
-{{#if (eq targetLanguage \'\'\'en-US\'\'\')}}
-The bios should be in English.
-{{else}}
 First, write the bios in English, then translate all the generated bios into {{targetLanguage}}.
-{{/if}}
 {{/if}}
 
 Existing Bio: {{{existingBio}}}

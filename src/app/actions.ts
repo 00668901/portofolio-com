@@ -22,7 +22,6 @@ import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 import type { GenerateThemeOutput } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
-Handlebars.registerHelper('eq', (a, b) => a === b);
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
@@ -30,7 +29,12 @@ Handlebars.registerHelper('json', function(context) {
 export async function handleGenerateBio(
   input: GenerateAuthorBioOptionsInput
 ) {
-  return await generateAuthorBioOptions(input);
+  const processedInput = { ...input };
+  // Prevent sending an ambiguous translation request for English.
+  if (processedInput.targetLanguage && processedInput.targetLanguage.startsWith('en')) {
+    processedInput.targetLanguage = undefined;
+  }
+  return await generateAuthorBioOptions(processedInput);
 }
 
 export async function handleGenerateDescription(
