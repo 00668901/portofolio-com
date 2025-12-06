@@ -26,10 +26,6 @@ Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
 
-Handlebars.registerHelper('eq', function (a, b) {
-  return a === b;
-});
-
 export async function handleGenerateBio(
   input: GenerateAuthorBioOptionsInput
 ) {
@@ -47,8 +43,15 @@ export async function handleLayoutAdjustment(input: AdjustPortfolioLayoutInput) 
 }
 
 export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author' | 'projects'>) {
+  // Pre-process history to add a user-friendly label for the prompt
+  const processedHistory = input.history.map(message => ({
+    ...message,
+    label: message.role === 'user' ? 'User' : 'Assistant',
+  }));
+
   return await liveChat({
     ...input,
+    history: processedHistory, // Pass the processed history
     name: author.name,
     author: author,
     projects: projects,

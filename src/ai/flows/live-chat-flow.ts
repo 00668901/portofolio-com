@@ -15,10 +15,12 @@ import { author, projects } from '@/lib/data';
 const MessageSchema = z.object({
     role: z.enum(['user', 'model']),
     content: z.string(),
+    // Add the optional 'label' field from pre-processing
+    label: z.string().optional(),
 });
 
 const LiveChatInputSchema = z.object({
-  history: z.array(MessageSchema).describe('The history of the conversation.'),
+  history: z.array(MessageSchema).describe('The history of the conversation, with a label for who is speaking.'),
   message: z.string().describe("The user's latest message in the chat."),
   name: z.string().describe('The name of the portfolio owner.'),
   author: z.any().describe("The author's profile data."),
@@ -61,7 +63,7 @@ Always maintain your persona as {{name}}'s assistant. Do not break character. Ke
 
 ## Conversation History:
 {{#each history}}
-- {{#if (eq this.role 'user')}}User{{else}}Assistant{{/if}}: {{{this.content}}}
+- {{this.label}}: {{{this.content}}}
 {{/each}}
 
 ## New User Message:
