@@ -75,10 +75,14 @@ export default function ProjectCard({ project: initialProject }: ProjectCardProp
     }
   };
 
+  const openLink = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <TooltipProvider>
-      <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-        <CardHeader className="relative">
+      <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+        <div className="relative cursor-pointer" onClick={() => setIsPreviewOpen(true)}>
           <div className="aspect-[3/2] relative w-full overflow-hidden rounded-t-lg">
             <Image
               src={project.imageUrl}
@@ -89,29 +93,34 @@ export default function ProjectCard({ project: initialProject }: ProjectCardProp
               data-ai-hint={project.imageHint}
             />
           </div>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute top-5 right-5 h-8 w-8 bg-background/70 backdrop-blur-sm"
-                onClick={onGenerateDescription}
-                disabled={isGenerating}
-              >
-                {isGenerating ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Wand2 className="h-4 w-4" />
-                )}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Generate new description with AI</p>
-            </TooltipContent>
-          </Tooltip>
+        </div>
+        <CardHeader>
+            <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute top-5 right-5 h-8 w-8 bg-background/70 backdrop-blur-sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onGenerateDescription();
+                    }}
+                    disabled={isGenerating}
+                >
+                    {isGenerating ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                    <Wand2 className="h-4 w-4" />
+                    )}
+                </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                <p>Generate new description with AI</p>
+                </TooltipContent>
+            </Tooltip>
         </CardHeader>
         <CardContent className="flex-1">
-          <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>
           <CardDescription className="text-muted-foreground">
             {project.description}
           </CardDescription>
@@ -123,24 +132,28 @@ export default function ProjectCard({ project: initialProject }: ProjectCardProp
             ))}
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <div>
+        <CardFooter className="flex justify-between items-center">
+          <div className="flex gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="View source code">
-                  <Github className="h-5 w-5" />
-                </a>
+                <Button variant="ghost" size="icon" asChild>
+                    <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="View source code" onClick={(e) => e.stopPropagation()}>
+                        <Github className="h-5 w-5" />
+                    </a>
+                </Button>
               </TooltipTrigger>
               <TooltipContent><p>Source Code</p></TooltipContent>
             </Tooltip>
             {project.liveUrl && (
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" onClick={() => setIsPreviewOpen(true)} aria-label="View live demo">
-                    <ExternalLink className="h-5 w-5" />
-                  </Button>
+                    <Button variant="ghost" size="icon" asChild>
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="View live demo" onClick={(e) => e.stopPropagation()}>
+                            <ExternalLink className="h-5 w-5" />
+                        </a>
+                    </Button>
                 </TooltipTrigger>
-                <TooltipContent><p>Interactive Preview</p></TooltipContent>
+                <TooltipContent><p>View Live Site</p></TooltipContent>
               </Tooltip>
             )}
           </div>

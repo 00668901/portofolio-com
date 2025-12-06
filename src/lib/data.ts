@@ -20,7 +20,7 @@ export const author: Author = {
     avatarHint: getImage("author-avatar").imageHint,
     skills: ["React", "Next.js", "TypeScript", "Node.js", "Python", "GenAI", "UI/UX Design", "Figma"],
     contact: {
-        email: "alex.doe@example.com",
+        email: "kurniawansteven429@gmail.com",
         phone: "+1 (555) 123-4567",
         social: {
             github: "https://github.com/johndoe",
@@ -41,7 +41,7 @@ export const projects: Project[] = [
         imageUrl: getImage("project-1").imageUrl,
         imageHint: getImage("project-1").imageHint,
         sourceUrl: "https://github.com",
-        liveUrl: "#"
+        liveUrl: "https://example.com"
     },
     {
         id: "p2",
@@ -51,7 +51,7 @@ export const projects: Project[] = [
         imageUrl: getImage("project-2").imageUrl,
         imageHint: getImage("project-2").imageHint,
         sourceUrl: "https://github.com",
-        liveUrl: "#"
+        liveUrl: "https://example.com"
     },
     {
         id: "p3",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
         imageUrl: getImage("project-4").imageUrl,
         imageHint: getImage("project-4").imageHint,
         sourceUrl: "https://github.com",
-        liveUrl: "#"
+        liveUrl: "https://example.com"
     },
     {
         id: "p5",
@@ -89,6 +89,6 @@ export const projects: Project[] = [
         imageUrl: getImage("project-6").imageUrl,
         imageHint:getImage("project-6").imageHint,
         sourceUrl: "https://github.com",
-        liveUrl: "#"
+        liveUrl: "https://example.com"
     },
 ];
