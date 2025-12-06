@@ -2,12 +2,16 @@ import { Github, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import { author } from "@/lib/data";
 import { Button } from "./ui/button";
 
-export default function Footer() {
+interface FooterProps {
+    authorName: string;
+}
+
+export default function Footer({ authorName }: FooterProps) {
     return (
       <footer className="border-t">
         <div className="container flex flex-col sm:flex-row items-center justify-between py-6 gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} {author.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {authorName}. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             {author.contact.social.github && (

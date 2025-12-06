@@ -12,10 +12,11 @@ import {
 } from "@/ai/flows/generate-alternative-project-descriptions";
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { generateTheme } from "@/ai/flows/generate-ui-theme";
+import { translateWebsite } from "@/ai/flows/translate-website";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
-import type { GenerateThemeOutput } from "@/lib/types";
+import type { GenerateThemeOutput, TranslateWebsiteInput } from "@/lib/types";
 import { author, projects } from "@/lib/data";
 
 Handlebars.registerHelper('json', function(context) {
@@ -57,6 +58,13 @@ export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author
 
 export async function handleGenerateTheme(): Promise<GenerateThemeOutput> {
   return await generateTheme();
+}
+
+export async function handleTranslateWebsite(input: TranslateWebsiteInput) {
+    if (input.targetLanguage.toLowerCase().startsWith('en')) {
+        return input.content;
+    }
+    return await translateWebsite(input);
 }
 
 const contactFormSchema = z.object({

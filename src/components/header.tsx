@@ -1,15 +1,24 @@
 "use client";
 
 import { useState } from 'react';
-import { Code2, Wand2, Moon, Sun, Loader2 } from "lucide-react";
+import { Code2, Wand2, Moon, Sun, Loader2, Globe } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "./ui/button";
 import { handleGenerateTheme } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
+import LanguageSelector from './language-selector';
+import type { PageContent } from '@/app/page';
 
-export default function Header() {
+interface HeaderProps {
+  pageContent: PageContent;
+  setPageContent: (content: PageContent) => void;
+  initialContent: PageContent;
+}
+
+export default function Header({ pageContent, setPageContent, initialContent }: HeaderProps) {
   const { theme, setTheme, setPalette } = useTheme();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false);
   const { toast } = useToast();
 
   const toggleTheme = () => {
@@ -38,40 +47,53 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <a href="#" className="mr-6 flex items-center space-x-2">
-          <Code2 className="h-6 w-6 text-primary" />
-          <span className="font-bold font-headline">Persona Portfolio</span>
-        </a>
-        <nav className="flex items-center gap-2 text-sm ml-auto">
-          <a
-            href="#projects"
-            className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
-          >
-            Projects
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 max-w-screen-2xl items-center">
+          <a href="#" className="mr-6 flex items-center space-x-2">
+            <Code2 className="h-6 w-6 text-primary" />
+            <span className="font-bold font-headline">Persona Portfolio</span>
           </a>
-          <a
-            href="#contact"
-            className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
-          >
-            Contact
-          </a>
-          <Button variant="ghost" size="icon" onClick={toggleTheme}>
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-           <Button variant="ghost" size="icon" onClick={onGenerateTheme} disabled={isGenerating}>
-            {isGenerating ? (
-              <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
-            ) : (
-              <Wand2 className="h-[1.2rem] w-[1.2rem]" />
-            )}
-            <span className="sr-only">Let AI choose theme</span>
-          </Button>
-        </nav>
-      </div>
-    </header>
+          <nav className="flex items-center gap-2 text-sm ml-auto">
+            <a
+              href="#projects"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
+            >
+              Contact
+            </a>
+            <Button variant="ghost" size="icon" onClick={() => setIsLanguageSelectorOpen(true)}>
+                <Globe className="h-[1.2rem] w-[1.2rem]" />
+                <span className="sr-only">Translate website</span>
+            </Button>
+            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+             <Button variant="ghost" size="icon" onClick={onGenerateTheme} disabled={isGenerating}>
+              {isGenerating ? (
+                <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
+              ) : (
+                <Wand2 className="h-[1.2rem] w-[1.2rem]" />
+              )}
+              <span className="sr-only">Let AI choose theme</span>
+            </Button>
+          </nav>
+        </div>
+      </header>
+      <LanguageSelector
+        isOpen={isLanguageSelectorOpen}
+        setIsOpen={setIsLanguageSelectorOpen}
+        pageContent={pageContent}
+        setPageContent={setPageContent}
+        initialContent={initialContent}
+      />
+    </>
   );
 }

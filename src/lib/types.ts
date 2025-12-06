@@ -1,35 +1,37 @@
 import { z } from 'zod';
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  imageUrl: string;
-  imageHint: string;
-  sourceUrl: string;
-  liveUrl?: string;
-}
+const ProjectSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  tags: z.array(z.string()),
+  imageUrl: z.string(),
+  imageHint: z.string(),
+  sourceUrl: z.string(),
+  liveUrl: z.string().optional(),
+});
+export type Project = z.infer<typeof ProjectSchema>;
 
-export interface Author {
-  name: string;
-  title: string;
-  bio: string;
-  avatarUrl: string;
-  avatarHint: string;
-  skills: string[];
-  contact: {
-    email: string;
-    phone: string;
-    social: {
-      github?: string;
-      linkedin?: string;
-      twitter?: string;
-      instagram?: string;
-      facebook?: string;
-    };
-  };
-}
+const AuthorSchema = z.object({
+    name: z.string(),
+    title: z.string(),
+    bio: z.string(),
+    avatarUrl: z.string(),
+    avatarHint: z.string(),
+    skills: z.array(z.string()),
+    contact: z.object({
+        email: z.string(),
+        phone: z.string(),
+        social: z.object({
+            github: z.string().optional(),
+            linkedin: z.string().optional(),
+            twitter: z.string().optional(),
+            instagram: z.string().optional(),
+            facebook: z.string().optional(),
+        }),
+    }),
+});
+export type Author = z.infer<typeof AuthorSchema>;
 
 const ThemeColorsSchema = z.object({
   background: z.string().describe('The background color in HSL format (e.g., "231 60% 94%").'),
@@ -57,5 +59,24 @@ export const GenerateThemeOutputSchema = z.object({
   light: ThemeColorsSchema.describe('The full color palette for the light theme.'),
   dark: ThemeColorsSchema.describe('The full color palette for the dark theme.'),
 });
-
 export type GenerateThemeOutput = z.infer<typeof GenerateThemeOutputSchema>;
+
+export const WebsiteContentSchema = z.object({
+    author: AuthorSchema,
+    projects: z.array(ProjectSchema),
+    page: z.object({
+      heroTitle: z.string(),
+      heroSubtitle: z.string(),
+      viewWorkButton: z.string(),
+    }),
+});
+export type WebsiteContent = z.infer<typeof WebsiteContentSchema>;
+
+export const TranslateWebsiteInputSchema = z.object({
+  content: WebsiteContentSchema.describe("The entire website content in JSON format."),
+  targetLanguage: z.string().describe('The target language for the translation, e.g., "Indonesian", "French".'),
+});
+export type TranslateWebsiteInput = z.infer<typeof TranslateWebsiteInputSchema>;
+
+export const TranslateWebsiteOutputSchema = WebsiteContentSchema;
+export type TranslateWebsiteOutput = z.infer<typeof TranslateWebsiteOutputSchema>;
