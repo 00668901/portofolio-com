@@ -20,11 +20,11 @@ export interface Author {
     email: string;
     phone: string;
     social: {
-      github: string;
-      linkedin: string;
-      twitter: string;
-      instagram: string;
-      facebook: string;
+      github?: string;
+      linkedin?: string;
+      twitter?: string;
+      instagram?: string;
+      facebook?: string;
     };
   };
 }

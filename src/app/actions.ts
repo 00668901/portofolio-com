@@ -16,6 +16,7 @@ import {
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { initializeFirebase } from "@/firebase";
+import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 
 
 export async function handleGenerateBio(
@@ -55,13 +56,16 @@ export async function handleContactSubmit(formData: {
     return {
       success: false,
       message: "Invalid form data.",
+      errors: parsed.error.flatten().fieldErrors,
     };
   }
   
   try {
     const { firestore } = initializeFirebase();
     const contactMessagesRef = collection(firestore, 'contactMessages');
-    await addDoc(contactMessagesRef, {
+    
+    // Using non-blocking update for better UX
+    addDocumentNonBlocking(contactMessagesRef, {
       ...parsed.data,
       sentAt: serverTimestamp(),
     });

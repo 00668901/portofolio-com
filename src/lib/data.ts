@@ -23,11 +23,11 @@ export const author: Author = {
         email: "alex.doe@example.com",
         phone: "+1 (555) 123-4567",
         social: {
-            github: "https://github.com",
-            linkedin: "https://linkedin.com",
-            twitter: "https://twitter.com",
-            instagram: "https://instagram.com",
-            facebook: "https://facebook.com",
+            github: "https://github.com/johndoe",
+            linkedin: "https://www.linkedin.com/in/johndoe",
+            twitter: "https://twitter.com/johndoe",
+            instagram: "https://www.instagram.com/johndoe",
+            facebook: "https://www.facebook.com/johndoe",
         },
     }
 };

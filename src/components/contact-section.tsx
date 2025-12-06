@@ -88,31 +88,41 @@ export default function ContactSection() {
                 <div>
                     <h3 className="font-headline text-2xl font-bold mb-4">Follow Me</h3>
                      <div className="flex items-center gap-2">
-                        <Button variant="outline" size="icon" asChild>
-                            <a href={author.contact.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                <Github className="h-5 w-5" />
-                            </a>
-                        </Button>
-                        <Button variant="outline" size="icon" asChild>
-                            <a href={author.contact.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                <Linkedin className="h-5 w-5" />
-                            </a>
-                        </Button>
-                        <Button variant="outline" size="icon" asChild>
-                            <a href={author.contact.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                <Twitter className="h-5 w-5" />
-                            </a>
-                        </Button>
-                        <Button variant="outline" size="icon" asChild>
-                            <a href={author.contact.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                <Instagram className="h-5 w-5" />
-                            </a>
-                        </Button>
-                        <Button variant="outline" size="icon" asChild>
-                            <a href={author.contact.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <Facebook className="h-5 w-5" />
-                            </a>
-                        </Button>
+                        {author.contact.social.github && (
+                            <Button variant="outline" size="icon" asChild>
+                                <a href={author.contact.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                    <Github className="h-5 w-5" />
+                                </a>
+                            </Button>
+                        )}
+                        {author.contact.social.linkedin && (
+                            <Button variant="outline" size="icon" asChild>
+                                <a href={author.contact.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                    <Linkedin className="h-5 w-5" />
+                                </a>
+                            </Button>
+                        )}
+                        {author.contact.social.twitter && (
+                            <Button variant="outline" size="icon" asChild>
+                                <a href={author.contact.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                    <Twitter className="h-5 w-5" />
+                                </a>
+                            </Button>
+                        )}
+                        {author.contact.social.instagram && (
+                            <Button variant="outline" size="icon" asChild>
+                                <a href={author.contact.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                    <Instagram className="h-5 w-5" />
+                                </a>
+                            </Button>
+                        )}
+                        {author.contact.social.facebook && (
+                            <Button variant="outline" size="icon" asChild>
+                                <a href={author.contact.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <Facebook className="h-5 w-5" />
+                                </a>
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>
