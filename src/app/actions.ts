@@ -31,7 +31,7 @@ export async function handleGenerateBio(
 ) {
   const processedInput = { ...input };
   // Prevent sending an ambiguous translation request for English.
-  if (processedInput.targetLanguage && processedInput.targetLanguage.startsWith('en')) {
+  if (processedInput.targetLanguage && processedInput.targetLanguage.toLowerCase().startsWith('en')) {
     processedInput.targetLanguage = undefined;
   }
   return await generateAuthorBioOptions(processedInput);

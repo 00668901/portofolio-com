@@ -33,14 +33,11 @@ const generateAuthorBioOptionsPrompt = ai.definePrompt({
   output: {schema: GenerateAuthorBioOptionsOutputSchema},
   prompt: `You are a professional biography writer.
 Given an existing author bio, generate {{numberOfOptions}} alternative bios that are engaging and highlight the author's skills and experience.
-
-{{#if targetLanguage}}
-First, write the bios in English, then translate all the generated bios into {{targetLanguage}}.
-{{/if}}
+If a 'targetLanguage' is provided and it is not English, you must first write the bios in English, and then translate them into the specified '{{targetLanguage}}'.
 
 Existing Bio: {{{existingBio}}}
 
-Your final output must only be a JSON object that contains the translated bios in the 'bios' array.`,
+Your final output must only be a JSON object that contains the final bios (translated, if requested) in the 'bios' array.`,
   config: {
     temperature: 0.7,
     maxOutputTokens: 1024,
