@@ -3,9 +3,9 @@
 import { z } from "zod";
 import Handlebars from "handlebars";
 import {
-  generateAuthorBioOptions,
-  GenerateAuthorBioOptionsInput,
-} from "@/ai/flows/generate-author-bio-options";
+  translateBio,
+  TranslateBioInput,
+} from "@/ai/flows/translate-bio";
 import {
   generateAlternativeProjectDescriptions,
   GenerateAlternativeProjectDescriptionsInput,
@@ -26,15 +26,15 @@ Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
 
-export async function handleGenerateBio(
-  input: GenerateAuthorBioOptionsInput
+export async function handleTranslateBio(
+  input: TranslateBioInput
 ) {
   const processedInput = { ...input };
   // Prevent sending an ambiguous translation request for English.
   if (processedInput.targetLanguage && processedInput.targetLanguage.toLowerCase().startsWith('en')) {
-    processedInput.targetLanguage = undefined;
+    return { translatedBio: processedInput.existingBio };
   }
-  return await generateAuthorBioOptions(processedInput);
+  return await translateBio(processedInput);
 }
 
 export async function handleGenerateDescription(

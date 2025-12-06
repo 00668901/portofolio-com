@@ -2,20 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Wand2, Loader2, Check } from "lucide-react";
+import { Wand2, Loader2 } from "lucide-react";
 import type { Author } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { handleGenerateBio } from "@/app/actions";
+import { handleTranslateBio } from "@/app/actions";
 import { useToast } from "@/hooks/use-toast";
 
 interface AuthorSectionProps {
@@ -24,49 +15,40 @@ interface AuthorSectionProps {
 
 export default function AuthorSection({ author }: AuthorSectionProps) {
   const [bio, setBio] = useState(author.bio);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [bioOptions, setBioOptions] = useState<string[]>([]);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
 
-  const onGenerateBio = async () => {
-    setIsGenerating(true);
+  const onTranslateBio = async () => {
+    setIsTranslating(true);
     try {
       const userLang = navigator.language;
-      const result = await handleGenerateBio({
-        existingBio: bio,
-        numberOfOptions: 3,
+      const result = await handleTranslateBio({
+        existingBio: author.bio, // always translate from the original bio
         targetLanguage: userLang,
       });
-      if (result.bios && result.bios.length > 0) {
-        setBioOptions(result.bios);
-        setIsDialogOpen(true);
+      if (result.translatedBio) {
+        setBio(result.translatedBio);
+        toast({
+          title: "Bio Translated!",
+          description: `The bio has been translated to your language.`,
+        });
       } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: "Could not generate bio options. The AI returned no content.",
+          description: "Could not translate bio. The AI returned no content.",
         });
       }
     } catch (error) {
-      console.error("Failed to generate bio:", error);
+      console.error("Failed to translate bio:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Could not generate bio options. Please try again.",
+        description: "Could not translate bio. Please try again.",
       });
     } finally {
-      setIsGenerating(false);
+      setIsTranslating(false);
     }
-  };
-
-  const selectBio = (selectedBio: string) => {
-    setBio(selectedBio);
-    setIsDialogOpen(false);
-    toast({
-        title: "Success!",
-        description: "Author bio has been updated.",
-    })
   };
 
   return (
@@ -100,45 +82,19 @@ export default function AuthorSection({ author }: AuthorSectionProps) {
               size="sm"
               variant="outline"
               className="absolute -top-4 -right-2"
-              onClick={onGenerateBio}
-              disabled={isGenerating}
+              onClick={onTranslateBio}
+              disabled={isTranslating}
             >
-              {isGenerating ? (
+              {isTranslating ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Wand2 className="mr-2 h-4 w-4" />
               )}
-              Generate Bio
+              Translate Bio
             </Button>
           </div>
         </div>
       </div>
-
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[625px]">
-          <DialogHeader>
-            <DialogTitle>Choose a New Bio</DialogTitle>
-            <DialogDescription>
-              Select one of the AI-generated bios below to update your profile.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            {bioOptions.map((option, index) => (
-              <Card key={index} className="hover:bg-muted/50 transition-colors">
-                <CardContent className="p-4 flex items-start gap-4">
-                  <p className="flex-1 text-sm text-foreground">{option}</p>
-                  <Button variant="ghost" size="icon" onClick={() => selectBio(option)}>
-                    <Check className="h-4 w-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <DialogFooter>
-            <Button variant="secondary" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }
