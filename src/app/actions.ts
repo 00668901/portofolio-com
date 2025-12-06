@@ -9,8 +9,8 @@ import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { translateWebsite } from "@/ai/flows/translate-website";
 import type { GenerateThemeOutput, TranslateWebsiteInput, ContactFormSchema, WebsiteContent } from "@/lib/types";
 import { author, projects } from "@/lib/data";
-import { Resend } from 'resend';
-import ContactFormEmail from '@/emails/contact-form-email';
+// import { Resend } from 'resend';
+// import ContactFormEmail from '@/emails/contact-form-email';
 
 
 export async function handleGenerateDescription(
@@ -62,20 +62,21 @@ export async function handleTranslateWebsite(input: TranslateWebsiteInput): Prom
 }
 
 export async function handleContactSubmit(formData: ContactFormSchema) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  // const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: 'kurniawansteven429@gmail.com',
-      subject: `New message from ${formData.name}`,
-      react: ContactFormEmail({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
-
+    // await resend.emails.send({
+    //   from: 'Portfolio Contact <onboarding@resend.dev>',
+    //   to: 'kurniawansteven429@gmail.com',
+    //   subject: `New message from ${formData.name}`,
+    //   react: ContactFormEmail({
+    //     name: formData.name,
+    //     email: formData.email,
+    //     message: formData.message,
+    //   }),
+    // });
+    console.log("Contact form submitted:", formData);
+    // Returning success true for now, but email sending is disabled.
     return {
       success: true,
       message: "Thank you for your message! I'll get back to you soon.",
