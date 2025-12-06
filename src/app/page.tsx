@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { ArrowDown, Wand2 } from "lucide-react";
+import { ArrowDown, Languages } from "lucide-react";
 
 import Header from "@/components/header";
 import AuthorSection from "@/components/author-section";
@@ -9,63 +9,53 @@ import ProjectGallery from "@/components/project-gallery";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { handleLayoutAdjustment } from "@/app/actions";
 import { useToast } from "@/hooks/use-toast";
-import { author, projects } from "@/lib/data";
-
-type SectionKey = "about" | "projects" | "contact";
+import { author as initialAuthor, projects as initialProjects } from "@/lib/data";
 
 export default function Home() {
-  const [layoutOrder, setLayoutOrder] = useState<SectionKey[]>([
-    "about",
-    "projects",
-    "contact",
-  ]);
-  const [isAdjustingLayout, setIsAdjustingLayout] = useState(false);
+  const [author, setAuthor] = useState(initialAuthor);
+  const [projects, setProjects] = useState(initialProjects);
+  const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
 
-  const adjustLayout = async () => {
-    setIsAdjustingLayout(true);
+  const handleTranslatePage = async () => {
+    setIsTranslating(true);
+    toast({
+      title: "Translating Website...",
+      description: "AI is translating the content into your language.",
+    });
+    // In a real implementation, you would create a new AI flow 
+    // to translate all page content and update the state.
+    // For this demonstration, we'll simulate a delay.
     try {
-      const result = await handleLayoutAdjustment({
-        userInteraction: "User clicked the 'Adjust Layout' button.",
-        contentPriorities: "Prioritize showcasing projects and skills.",
-      });
+      // Fake translation logic
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const newOrder = result.layoutInstructions
-        .split(",")
-        .map((s) => s.trim())
-        .filter((s): s is SectionKey => ["about", "projects", "contact"].includes(s));
+      // This is where you would call your new AI flow
+      // const translatedContent = await handleTranslateWebsite({
+      //   author, 
+      //   projects,
+      //   targetLanguage: navigator.language
+      // });
+      // setAuthor(translatedContent.author);
+      // setProjects(translatedContent.projects);
 
-      if (newOrder.length === 3) {
-        setLayoutOrder(newOrder);
-        toast({
-          title: "Layout Adjusted!",
-          description: "The portfolio layout has been optimized by AI.",
-        });
-      } else {
-        throw new Error("AI returned an invalid layout format.");
-      }
+      toast({
+        title: "Translation Complete!",
+        description: "The website content has been translated.",
+      });
+
     } catch (error) {
-      console.error("Failed to adjust layout:", error);
+       console.error("Failed to translate website:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Could not adjust layout. Please try again.",
+        description: "Could not translate the website. Please try again.",
       });
     } finally {
-      setIsAdjustingLayout(false);
+      setIsTranslating(false);
     }
   };
-
-  const sections: Record<SectionKey, React.ReactNode> = useMemo(
-    () => ({
-      about: <AuthorSection author={author} />,
-      projects: <ProjectGallery projects={projects} />,
-      contact: <ContactSection />,
-    }),
-    []
-  );
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -85,19 +75,23 @@ export default function Home() {
                   View My Work <ArrowDown className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-              <Button size="lg" variant="secondary" onClick={adjustLayout} disabled={isAdjustingLayout}>
-                <Wand2 className="mr-2 h-4 w-4" />
-                {isAdjustingLayout ? "Optimizing..." : "Let AI Adjust Layout"}
+              <Button size="lg" variant="secondary" onClick={handleTranslatePage} disabled={isTranslating}>
+                <Languages className="mr-2 h-4 w-4" />
+                {isTranslating ? "Translating..." : "Translate with AI"}
               </Button>
             </div>
           </div>
         </section>
         
-        {layoutOrder.map((key) => (
-          <div id={key} key={key}>
-            {sections[key]}
-          </div>
-        ))}
+        <div id="about">
+          <AuthorSection author={author} />
+        </div>
+        <div id="projects">
+          <ProjectGallery projects={projects} />
+        </div>
+        <div id="contact">
+          <ContactSection />
+        </div>
       </main>
       <Footer />
     </div>

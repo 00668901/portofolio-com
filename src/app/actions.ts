@@ -10,10 +10,6 @@ import {
   generateAlternativeProjectDescriptions,
   GenerateAlternativeProjectDescriptionsInput,
 } from "@/ai/flows/generate-alternative-project-descriptions";
-import {
-    adjustPortfolioLayout,
-    AdjustPortfolioLayoutInput,
-} from "@/ai/flows/dynamically-adjust-portfolio-layout";
 import { liveChat, LiveChatInput } from "@/ai/flows/live-chat-flow";
 import { generateTheme } from "@/ai/flows/generate-ui-theme";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -41,10 +37,6 @@ export async function handleGenerateDescription(
   input: GenerateAlternativeProjectDescriptionsInput
 ) {
   return await generateAlternativeProjectDescriptions(input);
-}
-
-export async function handleLayoutAdjustment(input: AdjustPortfolioLayoutInput) {
-    return await adjustPortfolioLayout(input);
 }
 
 export async function handleLiveChat(input: Omit<LiveChatInput, 'name' | 'author' | 'projects'>) {
