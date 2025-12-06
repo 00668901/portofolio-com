@@ -2,10 +2,6 @@
 
 import Handlebars from "handlebars";
 import {
-  translateBio,
-  TranslateBioInput,
-} from "@/ai/flows/translate-bio";
-import {
   generateAlternativeProjectDescriptions,
   GenerateAlternativeProjectDescriptionsInput,
 } from "@/ai/flows/generate-alternative-project-descriptions";
@@ -21,17 +17,6 @@ import { author, projects } from "@/lib/data";
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context, null, 2);
 });
-
-export async function handleTranslateBio(
-  input: TranslateBioInput
-) {
-  const processedInput = { ...input };
-  // Prevent sending an ambiguous translation request for English.
-  if (processedInput.targetLanguage && processedInput.targetLanguage.toLowerCase().startsWith('en')) {
-    return { translatedBio: processedInput.existingBio };
-  }
-  return await translateBio(processedInput);
-}
 
 export async function handleGenerateDescription(
   input: GenerateAlternativeProjectDescriptionsInput
