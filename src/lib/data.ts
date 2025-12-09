@@ -52,8 +52,8 @@ export const projects: Project[] = [
         tags: ["React Native", "TypeScript", "Node.js"],
         imageUrl: getImage("project-2").imageUrl,
         imageHint: getImage("project-2").imageHint,
-        sourceUrl: "https://github.com",
-        liveUrl: "https://example.com"
+        sourceUrl: "https://github.com/00668901/kelompok-5-golang",
+        liveUrl: "https://kelompok-mas-malik.vercel.app/"
     },
     {
         id: "p3",
