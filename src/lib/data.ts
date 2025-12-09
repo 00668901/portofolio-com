@@ -1,4 +1,4 @@
-import type { Author, Project } from './types';
+import type { Author, Project, Certificate } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 const getImage = (id: string) => {
@@ -29,7 +29,8 @@ export const author: Author = {
             instagram: "https://www.instagram.com/stevenn_kurniawan29/",
             facebook: "https://web.facebook.com/steven.kurniawan.90260",
         },
-    }
+    },
+    cvUrl: "/placeholder-cv.pdf"
 };
 
 export const projects: Project[] = [
@@ -92,5 +93,35 @@ export const projects: Project[] = [
         imageHint:getImage("project-6").imageHint,
         sourceUrl: "https://github.com",
         liveUrl: "https://example.com"
+    },
+];
+
+export const certificates: Certificate[] = [
+    {
+        id: "c1",
+        title: "Certified UI/UX Designer",
+        issuer: "Interaction Design Foundation",
+        year: "2023",
+        imageUrl: getImage("certificate-1").imageUrl,
+        imageHint: getImage("certificate-1").imageHint,
+        url: "https://example.com"
+    },
+    {
+        id: "c2",
+        title: "Associate Cloud Engineer",
+        issuer: "Google Cloud",
+        year: "2022",
+        imageUrl: getImage("certificate-2").imageUrl,
+        imageHint: getImage("certificate-2").imageHint,
+        url: "https://example.com"
+    },
+    {
+        id: "c3",
+        title: "Generative AI Fundamentals",
+        issuer: "AI School",
+        year: "2024",
+        imageUrl: getImage("certificate-3").imageUrl,
+        imageHint: getImage("certificate-3").imageHint,
+        url: "https://example.com"
     },
 ];

@@ -12,6 +12,17 @@ const ProjectSchema = z.object({
 });
 export type Project = z.infer<typeof ProjectSchema>;
 
+const CertificateSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  issuer: z.string(),
+  year: z.string(),
+  imageUrl: z.string(),
+  imageHint: z.string(),
+  url: z.string().optional(),
+});
+export type Certificate = z.infer<typeof CertificateSchema>;
+
 const AuthorSchema = z.object({
     name: z.string(),
     title: z.string(),
@@ -30,6 +41,7 @@ const AuthorSchema = z.object({
             facebook: z.string().optional(),
         }),
     }),
+    cvUrl: z.string(),
 });
 export type Author = z.infer<typeof AuthorSchema>;
 
@@ -71,12 +83,19 @@ export type ContactFormSchema = z.infer<typeof ContactFormSchema>;
 export const WebsiteContentSchema = z.object({
     author: AuthorSchema,
     projects: z.array(ProjectSchema),
+    certificates: z.array(CertificateSchema),
     page: z.object({
       heroTitle: z.string(),
       heroSubtitle: z.string(),
       viewWorkButton: z.string(),
       about: z.object({
         title: z.string(),
+      }),
+      credentials: z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        cvButton: z.string(),
+        viewButton: z.string(),
       }),
       myWork: z.object({
         title: z.string(),
@@ -116,5 +135,9 @@ export const TranslateWebsiteInputSchema = z.object({
 });
 export type TranslateWebsiteInput = z.infer<typeof TranslateWebsiteInputSchema>;
 
-export const TranslateWebsiteOutputSchema = WebsiteContentSchema;
+export const TranslateWebsiteOutputSchema = WebsiteContentSchema.omit({ author: true, projects: true, certificates: true }).extend({
+    author: AuthorSchema.omit({ contact: true, cvUrl: true }),
+    projects: z.array(ProjectSchema.omit({ id: true, sourceUrl: true, liveUrl: true })),
+    certificates: z.array(CertificateSchema.omit({ id: true, url: true })),
+});
 export type TranslateWebsiteOutput = z.infer<typeof TranslateWebsiteOutputSchema>;

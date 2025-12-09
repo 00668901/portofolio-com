@@ -5,23 +5,31 @@ import { ArrowDown } from "lucide-react";
 
 import Header from "@/components/header";
 import AuthorSection from "@/components/author-section";
+import CertificatesSection from "@/components/certificates-section";
 import ProjectGallery from "@/components/project-gallery";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { author as initialAuthor, projects as initialProjects } from "@/lib/data";
+import { author as initialAuthor, projects as initialProjects, certificates as initialCertificates } from "@/lib/data";
 import type { WebsiteContent } from "@/lib/types";
 
 export default function Home() {
   const initialContent: WebsiteContent = {
     author: initialAuthor,
     projects: initialProjects,
+    certificates: initialCertificates,
     page: {
       heroTitle: initialAuthor.name,
       heroSubtitle: initialAuthor.title,
       viewWorkButton: "View My Work",
       about: {
         title: "About Me",
+      },
+      credentials: {
+        title: "Credentials & Certificates",
+        subtitle: "A collection of my professional qualifications and achievements.",
+        cvButton: "Download CV",
+        viewButton: "View Credential"
       },
       myWork: {
         title: "My Work",
@@ -86,6 +94,9 @@ export default function Home() {
 
         <div id="about">
           <AuthorSection author={content.author} content={content.page.about} />
+        </div>
+        <div id="credentials">
+            <CertificatesSection certificates={content.certificates} author={content.author} content={content.page.credentials} />
         </div>
         <div id="projects">
           <ProjectGallery projects={content.projects} content={content.page.myWork} />

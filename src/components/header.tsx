@@ -56,6 +56,12 @@ export default function Header({ pageContent, setPageContent, initialContent }: 
           </a>
           <nav className="flex items-center gap-2 text-sm ml-auto">
             <a
+              href="#credentials"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
+            >
+              Credentials
+            </a>
+            <a
               href="#projects"
               className="transition-colors hover:text-foreground/80 text-foreground/60 px-2"
             >

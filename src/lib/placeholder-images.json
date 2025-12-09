@@ -41,6 +41,24 @@
       "description": "Creative portfolio website homepage.",
       "imageUrl": "https://images.unsplash.com/photo-1743363014543-d61b298cd030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MHx8fHwxNzY0OTkyNDY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "portfolio design"
+    },
+    {
+      "id": "certificate-1",
+      "description": "A professional certificate for UI/UX design.",
+      "imageUrl": "https://images.unsplash.com/photo-1614304234753-7d1801e76968?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBjZXJ0aWZpY2F0ZXxlbnwwfHx8fDE3NjUyNTk1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "design certificate"
+    },
+    {
+      "id": "certificate-2",
+      "description": "A professional certificate for cloud engineering.",
+      "imageUrl": "https://images.unsplash.com/photo-1746982087874-ccaa98aa7aea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbG91ZCUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI1OTUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cloud certificate"
+    },
+    {
+      "id": "certificate-3",
+      "description": "A professional certificate for artificial intelligence.",
+      "imageUrl": "https://images.unsplash.com/photo-1613825787302-22acac0de2fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxBSSUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI0MDA4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AI certificate"
     }
   ]
 }
