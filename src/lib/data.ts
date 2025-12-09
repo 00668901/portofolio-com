@@ -4,6 +4,7 @@ import { PlaceHolderImages } from './placeholder-images';
 const getImage = (id: string) => {
     const image = PlaceHolderImages.find(img => img.id === id);
     if (!image) {
+        console.error(`Image with id "${id}" not found.`);
         return {
             imageUrl: "https://picsum.photos/seed/placeholder/600/400",
             imageHint: "placeholder image"
@@ -135,7 +136,7 @@ export const certificates: Certificate[] = [
     },
     {
         id: "cert5",
-        title: "Seminar: Building Competent HR in Industry 4.0",
+        title: "Seminar: Building Competent HR",
         issuer: "Universitas Gunadarma",
         year: "2024",
         imageUrl: getImage("certificate-5").imageUrl,
