@@ -135,8 +135,8 @@ export const certificates: Certificate[] = [
     },
     {
         id: "cert5",
-        title: "National Student Webinar",
-        issuer: "SEMA FT-KMUP",
+        title: "Seminar: Building Competent HR in Industry 4.0",
+        issuer: "Universitas Gunadarma",
         year: "2024",
         imageUrl: getImage("certificate-5").imageUrl,
         imageHint: getImage("certificate-5").imageHint,
@@ -154,3 +154,4 @@ export const certificates: Certificate[] = [
 ];
 
     
+
