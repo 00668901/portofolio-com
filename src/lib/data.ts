@@ -31,7 +31,7 @@ export const author: Author = {
             facebook: "https://web.facebook.com/steven.kurniawan.90260",
         },
     },
-    cvUrl: "https://github.com/00668901/kumpulan-sertifikat/blob/main/CV%20Steven%20Kurniawan.pdf"
+    cvUrl: "https://raw.githubusercontent.com/00668901/kumpulan-sertifikat/main/CV%20Steven%20Kurniawan.pdf"
 };
 
 export const projects: Project[] = [
