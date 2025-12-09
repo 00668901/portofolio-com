@@ -39,13 +39,13 @@
     {
       "id": "project-6",
       "description": "Creative portfolio website homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1743363014543-d61b298cd030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MHx8fHwxNzY0OTkyNDY4fDA&ixlibrb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1743363014543-d61b298cd030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MHx8fHwxNzY0OTkyNDY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "portfolio design"
     },
     {
       "id": "certificate-1",
       "description": "Certificate for Introduction to Information Security.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/a875a6c3-1ff6-42ac-8b77-f2dc1d4c20fe.png",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/846c43c2-d352-4740-9750-84c2fa02bb52.png",
       "imageHint": "information security"
     },
     {
@@ -62,9 +62,9 @@
     },
     {
       "id": "certificate-4",
-      "description": "Certificate for a graphic designer internship.",
-      "imageUrl": "https://images.unsplash.com/photo-1614304234753-7d1801e76968?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBjZXJ0aWZpY2F0ZXxlbnwwfHx8fDE3NjUyNTk1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "design certificate"
+      "description": "Certificate for a data analyst webinar.",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/a8d8c205-d01d-44a6-b52f-12c8ff4579c0.png",
+      "imageHint": "data analysis"
     },
     {
       "id": "certificate-5",

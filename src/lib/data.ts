@@ -126,9 +126,9 @@ export const certificates: Certificate[] = [
     },
     {
         id: "cert4",
-        title: "Data Analyst Certificate",
+        title: "Webinar: Pengantar Analisis Data",
         issuer: "Growia",
-        year: "2024",
+        year: "2025",
         imageUrl: getImage("certificate-4").imageUrl,
         imageHint: getImage("certificate-4").imageHint,
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/STEVEN%20KURNIAWAN%20HARYANTO_DATA%20ANALYST%20CERTIFICATE_GROWIA.pdf"
@@ -154,4 +154,5 @@ export const certificates: Certificate[] = [
 ];
 
     
+
 
