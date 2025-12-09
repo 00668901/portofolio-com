@@ -102,9 +102,9 @@ export const certificates: Certificate[] = [
         title: "Webinar Mahasiswa Nasional",
         issuer: "SEMA FT-KMUP",
         year: "2025",
-        imageUrl: "/certificates/webinar-nasional.png",
+        imageUrl: getImage("certificate-4").imageUrl,
         imageHint: "webinar certificate",
-        url: "/certificates/webinar-nasional.png"
+        url: "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY/blob/main/path/to/your/certificate.png?raw=true"
     },
     {
         id: "c2",
