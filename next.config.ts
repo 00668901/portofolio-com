@@ -2,9 +2,7 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    allowedDevOrigins: ["https://6000-firebase-studio-1764999907253.cluster-m7dwy2bmizezqukxkuxd55k5ka.cloudworkstations.dev"],
-  },
+  allowedDevOrigins: ["https://6000-firebase-studio-1764999907253.cluster-m7dwy2bmizezqukxkuxd55k5ka.cloudworkstations.dev"],
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -28,6 +26,12 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
         port: '',
         pathname: '/**',
       },

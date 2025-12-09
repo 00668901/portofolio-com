@@ -98,13 +98,12 @@ export const projects: Project[] = [
 
 export const certificates: Certificate[] = [
     {
-        id: "c1",
-        title: "Certified UI/UX Designer",
-        issuer: "Interaction Design Foundation",
-        year: "2023",
-        imageUrl: getImage("certificate-1").imageUrl,
-        imageHint: getImage("certificate-1").imageHint,
-        url: "https://example.com"
+        id: "c4",
+        title: "Webinar Mahasiswa Nasional",
+        issuer: "SEMA FT-KMUP",
+        year: "2025",
+        imageUrl: getImage("certificate-4").imageUrl,
+        imageHint: getImage("certificate-4").imageHint,
     },
     {
         id: "c2",

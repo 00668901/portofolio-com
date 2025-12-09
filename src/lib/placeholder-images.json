@@ -59,6 +59,12 @@
       "description": "A professional certificate for artificial intelligence.",
       "imageUrl": "https://images.unsplash.com/photo-1613825787302-22acac0de2fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxBSSUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI0MDA4MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "AI certificate"
+    },
+    {
+      "id": "certificate-4",
+      "description": "Certificate for a national student webinar.",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
+      "imageHint": "webinar certificate"
     }
   ]
 }
