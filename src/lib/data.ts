@@ -100,10 +100,10 @@ export const certificates: Certificate[] = [
     {
         id: "cert1",
         title: "Introduction to Information Security",
-        issuer: "Dicoding",
+        issuer: "Cyber Army Indonesia",
         year: "2024",
         imageUrl: getImage("certificate-1").imageUrl,
-        imageHint: "security certificate",
+        imageHint: "information security certificate",
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Certificate-of-Completion-Introduction-to-Information-Security.pdf"
     },
     {
@@ -138,7 +138,7 @@ export const certificates: Certificate[] = [
         title: "National Student Webinar",
         issuer: "SEMA FT-KMUP",
         year: "2025",
-        imageUrl: getImage("certificate-1").imageUrl,
+        imageUrl: getImage("certificate-5").imageUrl,
         imageHint: "webinar certificate",
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Steven%20Kurniawan%20Haryanto.pdf"
     },
@@ -147,7 +147,7 @@ export const certificates: Certificate[] = [
         title: "Webinar Certificate",
         issuer: "Unknown",
         year: "2024",
-        imageUrl: getImage("certificate-2").imageUrl,
+        imageUrl: getImage("certificate-6").imageUrl,
         imageHint: "webinar certificate",
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Steven%20Kurniawan%20Haryanto.png"
     }

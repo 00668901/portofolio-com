@@ -44,9 +44,9 @@
     },
     {
       "id": "certificate-1",
-      "description": "A professional certificate for UI/UX design.",
-      "imageUrl": "https://images.unsplash.com/photo-1614304234753-7d1801e76968?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBjZXJ0aWZpY2F0ZXxlbnwwfHx8fDE3NjUyNTk1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "design certificate"
+      "description": "Certificate for Introduction to Information Security.",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
+      "imageHint": "information security"
     },
     {
       "id": "certificate-2",
@@ -62,8 +62,20 @@
     },
     {
       "id": "certificate-4",
+      "description": "Certificate for a graphic designer internship.",
+      "imageUrl": "https://images.unsplash.com/photo-1614304234753-7d1801e76968?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBjZXJ0aWZpY2F0ZXxlbnwwfHx8fDE3NjUyNTk1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "design certificate"
+    },
+    {
+      "id": "certificate-5",
       "description": "Certificate for a national student webinar.",
       "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
+      "imageHint": "webinar certificate"
+    },
+    {
+      "id": "certificate-6",
+      "description": "A webinar participation certificate.",
+      "imageUrl": "https://images.unsplash.com/photo-1746982087874-ccaa98aa7aea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbG91ZCUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI1OTUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "webinar certificate"
     }
   ]
