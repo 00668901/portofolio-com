@@ -48,11 +48,12 @@ export const projects: Project[] = [
     {
         id: "p2",
         title: "Zenith Mobile Banking",
-        description: "A sleek, modern mobile banking app focused on user experience and security. Features biometric login, transaction tracking, and AI-powered financial advice.",
-        tags: ["React Native", "TypeScript", "Node.js"],
-        imageUrl: getImage("project-2").imageUrl,
-        imageHint: getImage("project-2").imageHint,
+        description: "A simple photo-sharing web application developed with Go (Golang) for the backend API and React for the frontend, demonstrating skills in API development and modern frontend frameworks.",
+        tags: ["Go", "React", "API", "Frontend"],
+        imageUrl: getImage("project-1").imageUrl,
+        imageHint: getImage("project-1").imageHint,
         sourceUrl: "https://github.com/00668901/kelompok-5-golang",
+        liveUrl: ""
     },
     {
         id: "p3",
