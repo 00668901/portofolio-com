@@ -103,16 +103,16 @@ export const certificates: Certificate[] = [
         issuer: "Cyber Army Indonesia",
         year: "2024",
         imageUrl: getImage("certificate-1").imageUrl,
-        imageHint: "information security certificate",
+        imageHint: getImage("certificate-1").imageHint,
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Certificate-of-Completion-Introduction-to-Information-Security.pdf"
     },
     {
         id: "cert2",
-        title: "Data Analyst Project Challenge",
-        issuer: "Digital Skola",
+        title: "Intro to Data Analytics",
+        issuer: "RevoU",
         year: "2024",
         imageUrl: getImage("certificate-2").imageUrl,
-        imageHint: "data analyst certificate",
+        imageHint: getImage("certificate-2").imageHint,
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/DAMC_kurniawansteven429%40gmail.com_DAMC-091224-01-1-00272.pdf"
     },
     {
@@ -137,9 +137,9 @@ export const certificates: Certificate[] = [
         id: "cert5",
         title: "National Student Webinar",
         issuer: "SEMA FT-KMUP",
-        year: "2025",
+        year: "2024",
         imageUrl: getImage("certificate-5").imageUrl,
-        imageHint: "webinar certificate",
+        imageHint: getImage("certificate-5").imageHint,
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Steven%20Kurniawan%20Haryanto.pdf"
     },
     {
@@ -152,3 +152,5 @@ export const certificates: Certificate[] = [
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Steven%20Kurniawan%20Haryanto.png"
     }
 ];
+
+    

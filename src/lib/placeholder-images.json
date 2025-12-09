@@ -50,9 +50,9 @@
     },
     {
       "id": "certificate-2",
-      "description": "A professional certificate for cloud engineering.",
-      "imageUrl": "https://images.unsplash.com/photo-1746982087874-ccaa98aa7aea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbG91ZCUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI1OTUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cloud certificate"
+      "description": "Certificate for Intro to Data Analytics.",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/5c5c83c2-c516-43b9-b8cd-8a25d2cdd33b.png",
+      "imageHint": "data analytics"
     },
     {
       "id": "certificate-3",
@@ -69,7 +69,7 @@
     {
       "id": "certificate-5",
       "description": "Certificate for a national student webinar.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/a875a6c3-1ff6-42ac-8b77-f2dc1d4c20fe.png",
       "imageHint": "webinar certificate"
     },
     {
