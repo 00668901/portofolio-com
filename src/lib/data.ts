@@ -152,7 +152,3 @@ export const certificates: Certificate[] = [
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Steven%20Kurniawan%20Haryanto.png"
     }
 ];
-
-    
-
-
