@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Download, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import type { Certificate, WebsiteContent, Author } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -43,9 +43,9 @@ export default function CertificatesSection({
             <p className="text-muted-foreground max-w-2xl">{content.subtitle}</p>
           </div>
           <Button size="lg" asChild>
-            <a href={author.cvUrl} target="_blank" rel="noopener noreferrer" download>
+            <a href={author.cvUrl} target="_blank" rel="noopener noreferrer">
               {content.cvButton}
-              <Download className="ml-2 h-5 w-5" />
+              <ExternalLink className="ml-2 h-5 w-5" />
             </a>
           </Button>
         </div>

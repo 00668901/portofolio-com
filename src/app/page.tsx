@@ -28,7 +28,7 @@ export default function Home() {
       credentials: {
         title: "Credentials & Certificates",
         subtitle: "A collection of my professional qualifications and achievements.",
-        cvButton: "Download CV",
+        cvButton: "View CV",
         viewButton: "View Credential"
       },
       myWork: {
