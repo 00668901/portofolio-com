@@ -3,8 +3,8 @@
     {
       "id": "author-avatar",
       "description": "Author's profile picture",
-      "imageUrl": "https://images.unsplash.com/photo-1708426238272-994fcddabca4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMHBlcnNvbnxlbnwwfHx8fDE3NjQ5OTczNzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "portrait person"
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/60a2d593-3d07-42c2-83b5-31a89c93a61f.png",
+      "imageHint": "person cool"
     },
     {
       "id": "project-1",
