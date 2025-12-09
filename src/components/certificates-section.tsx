@@ -43,7 +43,7 @@ export default function CertificatesSection({
             <p className="text-muted-foreground max-w-2xl">{content.subtitle}</p>
           </div>
           <Button size="lg" asChild>
-            <a href={author.cvUrl} download>
+            <a href={author.cvUrl} target="_blank" rel="noopener noreferrer" download>
               {content.cvButton}
               <Download className="ml-2 h-5 w-5" />
             </a>
