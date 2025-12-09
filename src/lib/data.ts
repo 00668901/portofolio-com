@@ -98,30 +98,57 @@ export const projects: Project[] = [
 
 export const certificates: Certificate[] = [
     {
-        id: "c4",
-        title: "Webinar Mahasiswa Nasional",
-        issuer: "SEMA FT-KMUP",
-        year: "2025",
-        imageUrl: getImage("certificate-4").imageUrl,
-        imageHint: "webinar certificate",
-        url: "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY/blob/main/path/to/your/certificate.png?raw=true"
+        id: "cert1",
+        title: "Introduction to Information Security",
+        issuer: "Dicoding",
+        year: "2024",
+        imageUrl: getImage("certificate-1").imageUrl,
+        imageHint: "security certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Certificate-of-Completion-Introduction-to-Information-Security.pdf"
     },
     {
-        id: "c2",
-        title: "Associate Cloud Engineer",
-        issuer: "Google Cloud",
-        year: "2022",
+        id: "cert2",
+        title: "Data Analyst Project Challenge",
+        issuer: "Digital Skola",
+        year: "2024",
         imageUrl: getImage("certificate-2").imageUrl,
-        imageHint: getImage("certificate-2").imageHint,
-        url: "https://example.com"
+        imageHint: "data analyst certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/DAMC_kurniawansteven429%40gmail.com_DAMC-091224-01-1-00272.pdf"
     },
     {
-        id: "c3",
-        title: "Generative AI Fundamentals",
-        issuer: "AI School",
+        id: "cert3",
+        title: "Data Analyst Certificate",
+        issuer: "Growia",
         year: "2024",
         imageUrl: getImage("certificate-3").imageUrl,
-        imageHint: getImage("certificate-3").imageHint,
-        url: "https://example.com"
+        imageHint: "data analyst certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/STEVEN%20KURNIAWAN%20HARYANTO_DATA%20ANALYST%20CERTIFICATE_GROWIA.pdf"
     },
+    {
+        id: "cert4",
+        title: "Internship: Graphic Designer",
+        issuer: "SEMA FT-KMUP",
+        year: "2024",
+        imageUrl: getImage("certificate-4").imageUrl,
+        imageHint: "internship certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Magang_Graphic%20Designer_Steven%20Kurniawan%20Haryanto.pdf"
+    },
+    {
+        id: "cert5",
+        title: "National Student Webinar",
+        issuer: "SEMA FT-KMUP",
+        year: "2025",
+        imageUrl: getImage("certificate-1").imageUrl,
+        imageHint: "webinar certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Steven%20Kurniawan%20Haryanto.pdf"
+    },
+    {
+        id: "cert6",
+        title: "Webinar Certificate",
+        issuer: "Unknown",
+        year: "2024",
+        imageUrl: getImage("certificate-2").imageUrl,
+        imageHint: "webinar certificate",
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Steven%20Kurniawan%20Haryanto.png"
+    }
 ];
