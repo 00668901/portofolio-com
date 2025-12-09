@@ -37,13 +37,13 @@ export const author: Author = {
 export const projects: Project[] = [
     {
         id: "p1",
-        title: "AI-Powered Data Visualizer",
-        description: "An interactive web application that uses machine learning to generate insightful visualizations from complex datasets. Built with D3.js and a Python backend.",
-        tags: ["React", "Python", "D3.js", "AI/ML"],
+        title: "MyGram",
+        description: "A simple photo-sharing web application developed with Go (Golang) for the backend API and React for the frontend.",
+        tags: ["Go", "React", "API", "Frontend"],
         imageUrl: getImage("project-1").imageUrl,
         imageHint: getImage("project-1").imageHint,
-        sourceUrl: "https://github.com",
-        liveUrl: "https://example.com"
+        sourceUrl: "https://github.com/00668901/kelompok-5-golang",
+        liveUrl: "https://kelompok-mas-malik.vercel.app/"
     },
     {
         id: "p2",

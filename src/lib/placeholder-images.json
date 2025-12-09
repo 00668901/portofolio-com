@@ -4,13 +4,13 @@
       "id": "author-avatar",
       "description": "Author's profile picture",
       "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/60a2d593-3d07-42c2-83b5-31a89c93a61f.png",
-      "imageHint": "person cool"
+      "imageHint": "man smiling"
     },
     {
       "id": "project-1",
-      "description": "Abstract visualization of a data-driven application.",
-      "imageUrl": "https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMGRhdGF8ZW58MHx8fHwxNzY0OTM4MTg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "abstract data"
+      "description": "A social media feed on a laptop screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzb2NpYWwlMjBtZWRpYSUyMHdlYnNpdGV8ZW58MHx8fHwxNzY1MzM2NzUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social media"
     },
     {
       "id": "project-2",
@@ -75,7 +75,7 @@
     {
       "id": "certificate-6",
       "description": "A webinar participation certificate.",
-      "imageUrl": "https://images.unsplash.com/photo-1746982087874-ccaa98aa7aea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbG91ZCUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI1OTUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/4b865668-b7a4-4458-941f-a398f6d62552.png",
       "imageHint": "webinar certificate"
     }
   ]
