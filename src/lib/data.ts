@@ -117,21 +117,21 @@ export const certificates: Certificate[] = [
     },
     {
         id: "cert3",
-        title: "Data Analyst Certificate",
-        issuer: "Growia",
-        year: "2024",
+        title: "Internship: Graphic Designer",
+        issuer: "PT Kawan Kerja Indonesia",
+        year: "2025",
         imageUrl: getImage("certificate-3").imageUrl,
-        imageHint: "data analyst certificate",
-        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/STEVEN%20KURNIAWAN%20HARYANTO_DATA%20ANALYST%20CERTIFICATE_GROWIA.pdf"
+        imageHint: getImage("certificate-3").imageHint,
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Magang_Graphic%20Designer_Steven%20Kurniawan%20Haryanto.pdf"
     },
     {
         id: "cert4",
-        title: "Internship: Graphic Designer",
-        issuer: "SEMA FT-KMUP",
+        title: "Data Analyst Certificate",
+        issuer: "Growia",
         year: "2024",
         imageUrl: getImage("certificate-4").imageUrl,
-        imageHint: "internship certificate",
-        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Sertifikat_Magang_Graphic%20Designer_Steven%20Kurniawan%20Haryanto.pdf"
+        imageHint: getImage("certificate-4").imageHint,
+        url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/STEVEN%20KURNIAWAN%20HARYANTO_DATA%20ANALYST%20CERTIFICATE_GROWIA.pdf"
     },
     {
         id: "cert5",
@@ -148,7 +148,7 @@ export const certificates: Certificate[] = [
         issuer: "Unknown",
         year: "2024",
         imageUrl: getImage("certificate-6").imageUrl,
-        imageHint: "webinar certificate",
+        imageHint: getImage("certificate-6").imageHint,
         url: "https://github.com/00668901/kumpulan-sertifikat/blob/main/Steven%20Kurniawan%20Haryanto.png"
     }
 ];

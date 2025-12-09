@@ -39,26 +39,26 @@
     {
       "id": "project-6",
       "description": "Creative portfolio website homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1743363014543-d61b298cd030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MHx8fHwxNzY0OTkyNDY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1743363014543-d61b298cd030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MHx8fHwxNzY0OTkyNDY4fDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "portfolio design"
     },
     {
       "id": "certificate-1",
       "description": "Certificate for Introduction to Information Security.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/62bb6399-52d7-4638-aa21-0e318ab1fd69.png",
       "imageHint": "information security"
     },
     {
       "id": "certificate-2",
       "description": "Certificate for Intro to Data Analytics.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/5c5c83c2-c516-43b9-b8cd-8a25d2cdd33b.png",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/2e12a64c-87d2-43ce-9648-3162a8ab28fa.png",
       "imageHint": "data analytics"
     },
     {
       "id": "certificate-3",
-      "description": "A professional certificate for artificial intelligence.",
-      "imageUrl": "https://images.unsplash.com/photo-1613825787302-22acac0de2fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxBSSUyMGNlcnRpZmljYXRlfGVufDB8fHx8MTc2NTI0MDA4MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "AI certificate"
+      "description": "Certificate for a graphic designer internship.",
+      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/1b91361c-053d-4c33-91ac-1e8c9735d5fe.png",
+      "imageHint": "internship certificate"
     },
     {
       "id": "certificate-4",
