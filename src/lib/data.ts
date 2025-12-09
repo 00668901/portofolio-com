@@ -31,7 +31,7 @@ export const author: Author = {
             facebook: "https://web.facebook.com/steven.kurniawan.90260",
         },
     },
-    cvUrl: "/placeholder-cv.pdf"
+    cvUrl: "https://github.com/00668901/kumpulan-sertifikat/blob/main/CV%20Steven%20Kurniawan.pdf"
 };
 
 export const projects: Project[] = [
@@ -146,7 +146,7 @@ export const certificates: Certificate[] = [
     {
         id: "cert6",
         title: "Webinar Certificate",
-        issuer: "Unknown",
+        issuer: "BEM F-PK PNJ",
         year: "2024",
         imageUrl: getImage("certificate-6").imageUrl,
         imageHint: getImage("certificate-6").imageHint,
