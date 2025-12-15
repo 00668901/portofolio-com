@@ -45,37 +45,37 @@
     {
       "id": "certificate-1",
       "description": "Certificate for Introduction to Information Security.",
-      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjeWJlciUyMHNlY3VyaXR5fGVufDB8fHx8MTc2NTM4MTU4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmZvcm1hdGlvbiUyMHNlY3VyaXR5fGVufDB8fHx8MTc2NTc4NDI2NXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "information security"
     },
     {
       "id": "certificate-2",
       "description": "Certificate for Intro to Data Analytics.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/62bb6399-52d7-4638-aa21-0e318ab1fd69.png",
+      "imageUrl": "https://images.unsplash.com/photo-1545987796-200677ee1011?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkYXRhJTIwYW5hbHl0aWNzfGVufDB8fHx8MTc2NTc2ODUwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "data analytics"
     },
     {
       "id": "certificate-3",
       "description": "Certificate for a graphic designer internship.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/2e12a64c-87d2-43ce-9648-3162a8ab28fa.png",
-      "imageHint": "internship certificate"
+      "imageUrl": "https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxncmFwaGljJTIwZGVzaWdufGVufDB8fHx8MTc2NTc4MzkzNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graphic design"
     },
     {
       "id": "certificate-4",
       "description": "Certificate for a data analyst webinar.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/a8d8c205-d01d-44a6-b52f-12c8ff4579c0.png",
+      "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkYXRhJTIwYW5hbHlzaXN8ZW58MHx8fHwxNzY1NzMwNDIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "data analysis"
     },
     {
       "id": "certificate-5",
       "description": "Certificate for a national student webinar.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-_9d29-cd59b85c19d4/41f87968-3e4b-4b20-b47d-0887e1488c9a.png",
-      "imageHint": "webinar certificate"
+      "imageUrl": "https://images.unsplash.com/photo-1477569914486-b9955238cae0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzZW1pbmFyJTIwaHVtYW58ZW58MHx8fHwxNzY1Nzg0MjY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "seminar human"
     },
     {
       "id": "certificate-6",
       "description": "A webinar participation certificate.",
-      "imageUrl": "https://storage.googleapis.com/stedi-studio-outputs/e5e1e793-1383-4f9e-9d29-cd59b85c19d4/4b865668-b7a4-4458-941f-a398f6d62552.png",
+      "imageUrl": "https://images.unsplash.com/photo-1762329403968-9fef42b08a49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3ZWJpbmFyJTIwY2VydGlmaWNhdGV8ZW58MHx8fHwxNzY1Nzg0MjY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "webinar certificate"
     }
   ]
